@@ -43,10 +43,12 @@ be loaded and used directly in interactive sessions or batch jobs.
 
     Stanford offers institutional access to these AI providers through
     [Stanford AI services][url_stanford_ai]. Faculty, students, postdocs and
-    staff can use Stanford's services (Claude for Education, ChatGPT Edu,
-    Gemini Enterprise, GitHub Copilot) instead of personal vendor accounts.
-    For programmatic API keys to use with the agents below, see Stanford's
-    [AI API Gateway][url_stanford_ai_api].
+    staff can use Stanford's services instead of personal vendor accounts:
+    [Claude for Education][url_stanford_claude],
+    [ChatGPT Edu][url_stanford_chatgpt],
+    [Gemini Enterprise][url_stanford_gemini] and
+    [GitHub Copilot][url_stanford_github]. For programmatic API keys to use
+    with the agents below, see the [AI API Gateway][url_stanford_ai_api].
 
 !!! tip "Checking current versions"
 
@@ -68,8 +70,10 @@ $ claude
 ```
 
 Claude Code is available to Stanford users through Stanford's
-[Claude for Education][url_stanford_claude] service. It authenticates with an
-Anthropic API key:
+[Claude for Education][url_stanford_claude] service.
+
+Alternatively, it can use an Anthropic API key from Stanford's
+[AI API Gateway][url_stanford_ai_api]:
 
 ``` none { .copy .select }
 $ export ANTHROPIC_API_KEY=<your-api-key>
@@ -89,9 +93,10 @@ $ gemini
 ```
 
 Google's models are available to Stanford users through Stanford's
-[Gemini Enterprise][url_stanford_gemini] service. Gemini CLI can authenticate
-via a Google account (browser-based login on first run) or with a
-`GEMINI_API_KEY` environment variable:
+[Gemini Enterprise][url_stanford_gemini] service.
+
+Gemini CLI can authenticate via a Google account (browser-based login on first
+run) or with a `GEMINI_API_KEY` environment variable:
 
 ``` none { .copy .select }
 $ export GEMINI_API_KEY=<your-api-key>
@@ -121,8 +126,10 @@ $ codex
 ```
 
 OpenAI models are available to Stanford users through Stanford's
-[ChatGPT Edu][url_stanford_chatgpt] service. Codex authenticates with an
-OpenAI API key:
+[ChatGPT Edu][url_stanford_chatgpt] service.
+
+Alternatively, Codex can use an OpenAI API key from Stanford's
+[AI API Gateway][url_stanford_ai_api]:
 
 ``` none { .copy .select }
 $ export OPENAI_API_KEY=<your-api-key>
