@@ -92,11 +92,9 @@ $ ml gemini-cli
 $ gemini
 ```
 
-Google's models are available to Stanford users through Stanford's
-[Gemini Enterprise][url_stanford_gemini] service.
-
-Gemini CLI can authenticate via a Google account (browser-based login on first
-run) or with a `GEMINI_API_KEY` environment variable:
+Gemini CLI is not covered by Stanford's
+[Gemini Enterprise][url_stanford_gemini] service. It authenticates with a
+`GEMINI_API_KEY` environment variable:
 
 ``` none { .copy .select }
 $ export GEMINI_API_KEY=<your-api-key>
@@ -112,7 +110,8 @@ $ export GEMINI_API_KEY=<your-api-key>
     $ ml antigravity-cli
     ```
 
-    The `gemini-cli` module will remain available for now.
+    The `gemini-cli` module will remain available for now. Antigravity is not
+    part of Stanford's Gemini Enterprise offering either.
 
 
 ### :brands-openai: OpenAI Codex CLI
