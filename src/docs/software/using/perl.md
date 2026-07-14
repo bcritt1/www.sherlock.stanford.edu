@@ -1,3 +1,9 @@
+---
+icon: simple/perl
+tags:
+    - software
+---
+
 ## Introduction
 
 Perl is a high-level, general-purpose, interpreted, dynamic programming
@@ -9,8 +15,7 @@ Perl provides a framework allowing users to easily extend the language by
 installing new modules in their local environment. The Comprehensive Perl
 Archive Network (CPAN[^cpan]) is an archive of over 25,000 distributions of
 software written in Perl, as well as documentation for it. It is searchable at
-<http://metacpan.org> or <http://search.cpan.org> and mirrored in over 270
-locations around the world.
+<https://metacpan.org> and mirrored in over 270 locations around the world.
 
 
 ### More documentation
@@ -44,14 +49,14 @@ modules locally.
 
 !!! tip "Perl modules installation is only necessary once"
 
-    You only need to install Perl modules once on Sherlock. Since fielsystems
+    You only need to install Perl modules once on Sherlock. Since filesystems
     are shared, modules installed on one node will immediately be available on
     all nodes on the cluster.
 
 As an example, to install the `DateTime::TimeZone` module, you can do the
 following:
 
-``` shell
+``` none
 $ ml perl
 $ cpanm DateTime::TimeZone
 ```
@@ -64,16 +69,16 @@ syntax is required.
 For instance, to check that the `DateTime::TimeZone` module is correctly
 installed:
 
-``` shell
+``` none
 $ perl -MDateTime::TimeZone -e 'print $DateTime::TimeZone::VERSION . "\n"';
 2.13
 ```
 
-### Uninstallation
+### Uninstalling modules
 
 To uninstall a Perl module:
 
-``` shell
+``` none
 $ cpanm -U DateTime::TimeZone
 ```
 

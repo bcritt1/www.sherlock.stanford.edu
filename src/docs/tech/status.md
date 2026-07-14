@@ -1,3 +1,9 @@
+---
+icon: material/pulse
+tags:
+    - tech
+---
+
 <script src="//libraries.hund.io/status-js/status-3.5.0.js"></script>
 <script>
   var statusWidget = new Status.Widget({
@@ -28,10 +34,10 @@
 </style>
 
 
-!!! info "Scheduled maintenances"
+!!! info "Scheduled maintenance"
 
-    [Maintenance operations and upgrades][url_maintenances-and-upgrades] are
-    scheduled on Sherlock on a regular basis.  Per the University's [Minimum
+    [Maintenance operations and upgrades][url_maintenance-and-upgrades] are
+    scheduled on Sherlock on a regular basis. Per the University's [Minimum
     Security policies][url_minsec], we deploy security patches on Sherlock as
     required for compliance.
 
@@ -44,14 +50,38 @@ dashboard][url_status].
 
 ## Current usage
 
-<iframe title="CPUs in use" style="float:left;"
-  src="https://srcc-lookout.stanford.edu/public/d-solo/000000006/sherlock-public-graphs?orgId=1&refresh=5m&theme=light&panelId=3"
+<iframe class="grafana-panel" title="CPUs in use" style="float:left;"
+  data-src="https://srcc-lookout.stanford.edu/public/d-solo/000000006/sherlock-public-graphs?orgId=1&refresh=5m&panelId=3"
   width="28%" height="200px" frameborder="0">
 </iframe>
-<iframe title="CPU usage" style="float:right;"
-  src="https://srcc-lookout.stanford.edu/public/d-solo/000000006/sherlock-public-graphs?orgId=1&refresh=5m&theme=light&panelId=11"
+<iframe class="grafana-panel" title="CPU usage" style="float:right;"
+  data-src="https://srcc-lookout.stanford.edu/public/d-solo/000000006/sherlock-public-graphs?orgId=1&refresh=5m&panelId=11"
   width="68%" height="200px" frameborder="0">
 </iframe>
+<div style="clear:both; margin-bottom:2rem;"></div>
+<script>
+(function() {
+  function getGrafanaTheme() {
+    var scheme = document.body.getAttribute('data-md-color-scheme');
+    if (scheme === 'slate') return 'dark';
+    if (scheme) return 'light';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  }
+  function updateGrafanaTheme() {
+    var theme = getGrafanaTheme();
+    document.querySelectorAll('.grafana-panel').forEach(function(el) {
+      var url = new URL(el.getAttribute('data-src'));
+      url.searchParams.set('theme', theme);
+      if (el.src !== url.toString()) el.src = url.toString();
+    });
+  }
+  updateGrafanaTheme();
+  new MutationObserver(updateGrafanaTheme).observe(
+    document.body,
+    { attributes: true, attributeFilter: ['data-md-color-scheme'] }
+  );
+})();
+</script>
 
 
 [comment]: #  (link URLs -----------------------------------------------------)
@@ -59,6 +89,6 @@ dashboard][url_status].
 [url_minsec]:                   //uit.stanford.edu/guide/securitystandards
 [url_status]:                   //status.sherlock.stanford.edu
 
-[url_maintenances-and-upgrades]:/docs/concepts.md#maintenances-and-upgrades
+[url_maintenance-and-upgrades]:../concepts.md#maintenance-and-upgrades
 
 --8<--- "includes/_acronyms.md"

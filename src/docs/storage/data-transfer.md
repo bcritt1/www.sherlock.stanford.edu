@@ -1,4 +1,5 @@
 ---
+icon: material/transfer
 tags:
     - connection
 ---
@@ -7,7 +8,7 @@ tags:
 
 A number of methods allow transferring data in/out of Sherlock. For most cases,
 we recommend using [SSH-based file transfer commands](#ssh-based-protocols),
-such as `scp`, `sftp`, or `rsync`.  They will provide the best
+such as `scp`, `sftp`, or `rsync`. They will provide the best
 performance for data transfers from and to campus.
 
 
@@ -186,7 +187,7 @@ and then should not be typed in).
 
         SSHFS on macOS is known to try to automatically reconnect filesystem
         mounts after resuming from sleep or suspend, even without any valid
-        credentials.  As a result, it will generate a lot of failed connection
+        credentials. As a result, it will generate a lot of failed connection
         attempts and likely make your [IP address blacklisted][url_auth_fail]
         on login nodes.
 
@@ -220,9 +221,9 @@ and then should not be typed in).
     ```
 
     On Windows, once SSHFS is installed, you can mount the `$SCRATCH`
-    filesystem as a network drive through the windows file explorer.  To do
+    filesystem as a network drive through the windows file explorer. To do
     this, go to "This PC", right-click in the "Network Locations" section of
-    the window and select "Add a Network Drive".  Then, in the "Add Network
+    the window and select "Add a Network Drive". Then, in the "Add Network
     Location Wizard", you would use the following network address:
 
     ```
@@ -309,7 +310,7 @@ For more information about the CLI, please see the
 [Globus CLI quick start][url_globus_cli_quickstart]. Note that the Globus CLI
 is available through the module system on Sherlock:
 
-```shell
+``` none
 $ module load system py-globus-cli
 $ globus login
 # follow instructions to get set up
@@ -325,7 +326,7 @@ endpoints or collections.
 For example, to asynchronously copy files between Sherlock and Oak (if
 that you have already been allocated Oak storage):
 
-```shell
+``` none
 $ GLOBUS_SHERLOCK_UUID="6881ae2e-db26-11e5-9772-22000b9da45e"
 $ GLOBUS_OAK_UUID="8b3a8b64-d4ab-4551-b37e-ca0092f769a7"
 $ globus transfer --recursive \
@@ -339,7 +340,7 @@ $ globus transfer --recursive \
 !!! Warning "No shell"
 
     The DTNs don't provide any interactive shell, so connecting via SSH
-    directly won't work. It will only accept `scp`, `sftp`, `rsync` of `bbcp`
+    directly won't work. It will only accept `scp`, `sftp`, `rsync`, or `bbcp`
     connections.
 
 A pool of dedicated Data Transfer Nodes is available on Sherlock, to provide
@@ -363,7 +364,7 @@ It supports:
 To transfer files via the DTNs, simply use `dtn.sherlock.stanford.edu` as a
 remote server host name. For instance:
 
-``` shell
+``` none
 $ scp foo <sunetid>@dtn.sherlock.stanford.edu:~/foo
 ```
 
@@ -399,7 +400,7 @@ We provide the `rclone` tool on Sherlock to interact with Google Drive. You'll
 just need to load the `rclone` module to be able to use it to move your
 files from/to Google Drive:
 
-``` shell
+``` none
 $ module load system rclone
 $ rclone --help
 ```
@@ -415,7 +416,7 @@ Stanford's Google Drive.
 You can also access AWS storage from the Sherlock command line with the [AWS
 Command Line Interface][url_aws-cli]:
 
-```shell
+``` none
 $ module load system aws-cli
 $ aws help
 ```
@@ -427,7 +428,7 @@ If you need to access other cloud storage services, you can use
 Google Drive, Amazon S3, Box, Dropbox, Google Cloud Storage, Amazon Drive,
 Microsoft OneDrive and many more.
 
-``` shell
+``` none
 $ ml load system rclone
 $ rclone -h
 ```
@@ -460,15 +461,15 @@ documentation][url_rclone].
 [url_globus_xfer_start]:    //app.globus.org/file-manager
 [url_globus_sherlock]:      //app.globus.org/file-manager?origin_id=6881ae2e-db26-11e5-9772-22000b9da45e
 [url_globus_oak]:           //app.globus.org/file-manager?origin_id=8b3a8b64-d4ab-4551-b37e-ca0092f769a7
-[url_bbcp]:                 //www.slac.stanford.edu/~abh/bbcp
+[url_bbcp]:                 //github.com/bbcp/bbcp
 [url_rclone]:               //rclone.org/
 [url_aws-cli]:              //aws.amazon.com/cli/
 [url_uit_gdrive]:           //uit.stanford.edu/service/googleapps/drive
 [url_oak]:                  //uit.stanford.edu/service/oak-storage
 
-[url_rclone_tutorial]:      /docs/software/using/rclone.md
-[url_ssh_clients]:          /docs/getting-started/index.md#ssh-clients
-[url_auth_fail]:            /docs/getting-started/connecting.md#authentication-failures
+[url_rclone_tutorial]:      ../software/using/rclone.md
+[url_ssh_clients]:          ../getting-started/index.md#ssh-clients
+[url_auth_fail]:            ../getting-started/connecting.md#authentication-failures
 
 [comment]: #  (footnotes -----------------------------------------------------)
 

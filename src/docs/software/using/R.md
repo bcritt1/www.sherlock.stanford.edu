@@ -1,3 +1,9 @@
+---
+icon: simple/r
+tags:
+    - software
+---
+
 ## Introduction
 
 [R][url_r] is a programming language and software environment for statistical
@@ -204,7 +210,7 @@ The downloaded source packages are in
 
 and when it's done, you should be able to load the package within R with:
 
-``` R
+``` R { .copy .select }
 > library(doParallel)
 Loading required package: foreach
 Loading required package: iterators
@@ -246,7 +252,7 @@ Specifying the full destination path for each package installation could
 quickly become tiresome, so to avoid this, you can create a `.Renviron`
 file in your `$HOME` directory, and define your `R_libs` path there:
 
-``` shell
+``` none
 $ cat << EOF > $HOME/.Renviron
 R_LIBS=~/R_libs
 EOF
@@ -288,7 +294,7 @@ For instance, adding the following contents to your `~/.Rprofile` will make
 sure that every `install.packages()` invocation will use the closest CRAN
 mirror:
 
-``` R
+``` R { .copy .select }
 ## local creates a new, empty environment
 ## This avoids polluting the global environment with
 ## the object r
@@ -316,14 +322,14 @@ downloaded 169 KB
 R packages can be directly installed from GitHub using the `devtools` package.
 `devtools` needs to be installed first, with:
 
-``` R
+``` R { .copy .select }
 > install.packages("devtools")
 ```
 
 And then, you can then install a R package directly from its GitHub repository.
 For instance, to install `dplyr` from <https://github.com/tidyverse/dplyr>:
 
-``` R
+``` R { .copy .select }
 > library(devtools)
 > install_github("tidyverse/dplyr")
 ```
@@ -334,7 +340,7 @@ Sometimes when installing R packages, other software is needed for the
 installation and/or compilation. For instance, when trying to install the `sf`
 package, you may encounter the following error messages:
 
-``` R
+``` R { .copy .select }
 > install.packages("sf")
 [...]
 Configuration failed because libudunits2.so was not found. Try installing:...
@@ -393,7 +399,7 @@ session.
 
 For instance, to update the `doParallel` package:
 
-``` R
+``` R { .copy .select }
 > update.packages('doParallel')
 ```
 
@@ -413,9 +419,57 @@ all the packages in your local R library are up to date.
 To remove a package from your local R library, you can use the
 `remove.packages()` function. For instance:
 
-``` R
+``` R { .copy .select }
 > remove.packages('doParallel')
 ```
+
+
+### Common packages
+
+#### Seurat
+
+[Seurat][url_seurat] is a commonly used R package for QC, analysis, and
+exploration of single-cell RNA-seq data. It can also be a bit hard to install
+on Sherlock because one of its dependencies, Matrix, doesn't install cleanly
+from [CRAN][url_cran]. However, with the help of a few helper modules on Linux
+and some special syntax for installing Matrix in R, Seurat can be a breeze to
+install in many of our [R module versions][url_software_list].
+
+First, you'll want to get a compute session and purge your current environment:
+
+``` none
+$ sh_dev -c 4
+$ ml purge
+```
+
+You may have to wait a bit for an allocation, but once you do, you can load R
+and some helper modules and then launch R.
+
+``` none
+$ ml R/4.2
+$ ml glpk gmp
+$ R
+```
+
+We've tested this on 4.2 and 4.3, but you can try it on other versions as well.
+
+Once you're in R, first install Matrix manually from a tarball:
+
+``` R { .copy .select }
+>>> install.packages("https://cran.r-project.org/src/contrib/Archive/Matrix/Matrix_1.6-5.tar.gz", repos=NULL, type="source", Ncpus=4)
+```
+
+and finally, install and launch Seurat:
+
+``` R { .copy .select }
+>>> install.packages("Seurat", Ncpus=4)
+>>> library(Seurat)
+```
+
+If you run into any issues, feel free to reach out to [support][url_contact].
+
+
+
 
 ### Examples
 
@@ -432,7 +486,7 @@ with 4 CPUs, load the modules for the necessary dependencies, and install
 `devtools` for R version 4.4.2. Note: these dependencies will also work for
 installing the popular library `tidyverse`.
 
-```none
+``` none
 # Launch interactive dev session with 4 CPUs
 
 $ sh_dev -c 4
@@ -441,7 +495,7 @@ $ sh_dev -c 4
 
 $ ml purge
 $ ml R/4.4.2
-$ ml libgit2/1.9.1 fribidi/1.0.12 libwebp/1.3.0
+$ ml libgit2/1.9.1 fribidi/1.0.12 libwebp/1.3.0 freetype/2.9.1 cmake/3.31.4
 
 # Launch R and install devtools
 
@@ -516,13 +570,13 @@ Save the two scripts below in a directory on Sherlock:
 
 And then submit the job with:
 
-``` shell
+``` none
 $ sbatch doParallel_test.sbatch
 ```
 
 Once the job has completed, the output file should contain something like this:
 
-``` shell
+``` none
 $ cat doParallel_test.out
 [1] "16"
 elapsed
@@ -532,7 +586,7 @@ elapsed
 **Bonus points**: observe the scalability of the `doParallel` loop by
 submitting the same script using a varying number of CPU cores:
 
-``` shell
+``` none
 $ for i in 2 4 8 16; do
     sbatch --out=doP_${i}.out --ntasks-per-node=$i doParallel_test.sbatch
 done
@@ -540,7 +594,7 @@ done
 
 When the jobs are done:
 
-``` shell
+``` none
 $ for i in 2 4 8 16; do
     printf "%2i cores: %4.1fs\n" $i $(tail -n1 doP_$i.out)
 done
@@ -559,7 +613,7 @@ To distribute parallel R tasks on multiple nodes, you can use the
 To install the `Rmpi` package, a module providing MPI library must first be
 loaded. For instance:
 
-``` shell
+``` none
 $ ml openmpi R
 $ R
 > install.packages("Rmpi")
@@ -615,13 +669,13 @@ Once the package is installed, the following scripts demonstrate a very basic
 You can save those scripts as `Rmpi-test.R` and
 `Rmpi-test.sbatch` and then submit your job with:
 
-``` shell
+``` none
 $ sbatch Rmpi-test.sbatch
 ```
 
 When the job is done, its output should look like this:
 
-``` shell
+``` none
 $ cat Rmpi-test.log
         3 slaves are spawned successfully. 0 failed.
 master (rank 0, comm 1) of size 4 is running on: sh-06-33
@@ -694,7 +748,7 @@ the [`gpuR`][url_gpuR] R package.
 After submitting the job with `sbatch gpuR-test.sbatch`, the output file should
 contain something like this:
 
-``` shell
+``` shell { .copy .select }
 [1] "CPU times"
 [1] "1  0.00"
 [1] "2  0.00"
@@ -722,14 +776,16 @@ which shows a decent speedup for running on a GPU for the largest matrix sizes.
 
 [url_r]:                //www.r-project.org/
 [url_r_docs]:           //stat.ethz.ch/R-manual/
-[url_s]:                //ect.bell-labs.com/sl/S/
+[url_s]:                //en.wikipedia.org/wiki/S_(programming_language)
 [url_heredoc]:          //en.wikipedia.org/wiki/Here_document
 [url_devtools]:         //cran.r-project.org/web/packages/devtools/index.html
 [url_doparallel]:       //cran.r-project.org/web/packages/doParallel/index.html
 [url_cran]:             //cran.r-project.org/
-[url_rmpi]:             //cran.r-project.org/web/packages/Rmpi
-[url_gpur]:             //cran.r-project.org/web/packages/gpuR
+[url_rmpi]:             //cran.r-project.org/web/packages/Rmpi/
+[url_gpur]:             //cran.r-project.org/web/packages/gpuR/
+[url_seurat]:           //satijalab.org/seurat/
 [url_contact]:          mailto:{{support_email}}
+
 
 [url_modules]:          ../modules.md
 [url_software_list]:    ../list.md

@@ -23,7 +23,31 @@
   --md-accent-fg-color--transparent:   #b1040e0a;
   /* https://github.com/squidfunk/mkdocs-material/issues/4755 */
   --md-typeset-a-color: var(--md-primary-fg-color--light);
+}
 
+/* hide dark-only images in the sherlock (light) scheme, mirroring Material's default scheme rule */
+[data-md-color-scheme="sherlock"] img[src$="#only-dark"] { display: none; }
+
+/* invert dark favicons so they're visible in dark mode */
+[data-md-color-scheme="slate"] img[src*="github.com/favicon"],
+[data-md-color-scheme="slate"] img[src*="mkdocs.org"] { filter: invert(1); }
+
+[data-md-color-scheme="slate"] {
+  /* checkmark columns in tables */
+  .chk_yes { color: #81c784; }
+  .chk_no  { color: #e57373; }
+
+  /* software list tags */
+  .sw_mpi  { color: #90caf9; }
+  .sw_gpu  { color: #81c784; }
+  .sw_lic  { color: #e57373; }
+  .sw_def  { color: #9e9e9e; }
+
+  /* sherlock admonition background — near-invisible at 0x10 opacity on slate */
+  .md-typeset .sherlock > .admonition-title,
+  .md-typeset .sherlock > summary {
+    background-color: #8c151525;
+  }
 }
 
 /* announce bar */
@@ -51,6 +75,27 @@
 
 /* cookie consent link */
 .md-footer-meta.md-typeset .consent {
+    color: var(--md-footer-fg-color--lighter);
+}
+
+/* Sherlock news and status links */
+.md-social .md-social__sherlock {
+    display: flex;
+    align-items: center;
+    border-left: 1px solid var(--md-footer-fg-color--lighter);
+    margin-left: 0.2rem;
+    padding-left: 0.4rem;
+}
+
+/* Stanford institutional social links */
+.md-social .md-social__institutional {
+    display: flex;
+    align-items: center;
+    border-left: 1px solid var(--md-footer-fg-color--lighter);
+    margin-left: 0.2rem;
+    padding-left: 0.4rem;
+}
+.md-social .md-social__institutional .md-social__link {
     color: var(--md-footer-fg-color--lighter);
 }
 
@@ -125,4 +170,12 @@
 }
 .rotate {
   animation: rotation 2s infinite linear;
+}
+
+/* blend dark-mode content backgrounds with the page background:
+   lighten picks the max of each channel, so darker backgrounds are replaced
+   by the page bg while brighter content is left unchanged */
+[data-md-color-scheme="slate"] .grafana-panel,
+[data-md-color-scheme="slate"] img[src$="#only-dark"] {
+  mix-blend-mode: lighten;
 }

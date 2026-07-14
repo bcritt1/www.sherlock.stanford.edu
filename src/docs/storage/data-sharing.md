@@ -1,3 +1,9 @@
+---
+icon: material/share-variant
+tags:
+    - storage
+---
+
 The following sections present and detail options to share data across users
 and groups on Sherlock.
 
@@ -79,7 +85,7 @@ details and examples, please refer to [this documentation][url_rhel_posix_acl].
 In the example below, we allow two users to access a restricted directory
 located at `$GROUP_SCRATCH/restricted-dir/`:
 
-``` shell
+``` none
 $ cd $GROUP_SCRATCH
 
 ### Create new directory
@@ -152,27 +158,27 @@ Commonly used entries for these fields are:
   special principles: `OWNER@`, `GROUP@`, and `EVERYONE@`.
 * **permissions**: there are 14 permission characters, as well as the shortcuts
   `R`, `W`, and `X`. Here is a list of possible permissions that can be
-  included in the permissions field (options are Case Sensitive)<small>
-  * `r` read-data (files) / list-directory (directories)
-  * `w` write-data (files) / create-file (directories)
-  * `x` execute (files) / change-directory (directories)
-  * `a` append-data (files) / create-subdirectory (directories)
-  * `t` read-attributes: read the attributes of the file/directory.
-  * `T` write-attributes: write the attributes of the file/directory.
-  * `n` read-named-attributes: read the named attributes of the
+  included in the permissions field (options are Case Sensitive)
+  <small>
+    * `r` read-data (files) / list-directory (directories)
+    * `w` write-data (files) / create-file (directories)
+    * `x` execute (files) / change-directory (directories)
+    * `a` append-data (files) / create-subdirectory (directories)
+    * `t` read-attributes: read the attributes of the file/directory.
+    * `T` write-attributes: write the attributes of the file/directory.
+    * `n` read-named-attributes: read the named attributes of the
       file/directory.
-  * `N` write-named-attributes: write the named attributes of the
+    * `N` write-named-attributes: write the named attributes of the
       file/directory.
-  * `c` read-ACL: read the file/directory NFSv4 ACL.
-  * `C` write-ACL: write the file/directory NFSv4 ACL.
-  * `o` write-owner: change ownership of the file/directory.
-  * `y` synchronize: allow clients to use synchronous I/O with the server.
-  * `d` delete: delete the file/directory. Some servers will allow a delete
+    * `c` read-ACL: read the file/directory NFSv4 ACL.
+    * `C` write-ACL: write the file/directory NFSv4 ACL.
+    * `o` write-owner: change ownership of the file/directory.
+    * `y` synchronize: allow clients to use synchronous I/O with the server.
+    * `d` delete: delete the file/directory. Some servers will allow a delete
       to occur if either this permission is set in the file/directory or if the
       delete-child permission is set in its parent directory.
-  * `D` delete-child: remove a file or subdirectory from within the given
+    * `D` delete-child: remove a file or subdirectory from within the given
       directory (directories only)
-
    </small>
 
 A comprehensive listing of allowable field strings is given in the manual page
@@ -180,10 +186,10 @@ A comprehensive listing of allowable field strings is given in the manual page
 
 To see what permissions are set on a particular file, use the `nfs4_getfacl`
 command. For example, newly created `file1` may have default permissions listed
-by `ls -l` as `-rw-r—r—`. Listing the permissions with `nfs4_getfacl` would
+by `ls -l` as `-rw-r--r--`. Listing the permissions with `nfs4_getfacl` would
 display the following:
 
-``` shell
+``` none
 $ nfs4_getfacl file1
 A::OWNER@:rwatTnNcCoy
 A:g:GROUP@:rtncy
@@ -195,12 +201,12 @@ NFSv4 provides the shortcuts `R`, `W` and `X` for setting read, write, and
 execute permissions. For example, to add write permissions for the current
 group on `file1`, use `nfs4_setfacl` with the `-a` switch:
 
-``` shell
+``` none
 $ nfs4_setfacl -a A::GROUP@:W file1
 ```
 
 This command switched the `GROUP@` permission field from `rtncy` to
-`rwatTnNcCoy`.  However, be aware that NFSv4 file permission shortcuts have a
+`rwatTnNcCoy`. However, be aware that NFSv4 file permission shortcuts have a
 different meanings than the traditional Unix `r`, `w`, and `x`. For example
 issuing `chmod g+w file1` will set `GROUP@` to `rwatncy`.
 
@@ -213,7 +219,7 @@ permissions than does the `chmod` command. For example, if user `joe` wants to
 give read, write and traverse permissions to `jack` for her directory
 `private`, she would issue:
 
-``` shell
+``` none
 $ nfs4_setfacl -R -a A::jack@sherlock:RWX private/
 ```
 
@@ -223,7 +229,7 @@ within `private/` as well.
 To allow `jack` to create files and subdirectories within `private/` with the
 permissions as granted above, inheritance rules need to be applied.
 
-``` shell
+``` none
 $ nfs4_setfacl -R -a A:fd:jack@sherlock:RWX private/
 ```
 
@@ -253,7 +259,7 @@ there are two possibilities:
 
   1. [sponsor a SUNet ID][url_susponsorship][^sunet_level] for these
      collaborators, and [contact us][url_contact] us to create a account for
-     them on Sherlock.  This will grant them access to your resources on
+     them on Sherlock. This will grant them access to your resources on
      Sherlock (compute as well as storage) and give them access to your group
      shared files, like any other user in your group.
 
@@ -272,8 +278,6 @@ there are two possibilities:
      For complete details about sharing data with Globus, please see the Globus
      documentation at https://docs.globus.org/how-to/share-files/
 
-
-
 [comment]: #  (link URLs -----------------------------------------------------)
 
 [url_rhel_posix_acl]:   //access.redhat.com/documentation/en-us/red_hat_enterprise_linux/7/html/system_administrators_guide/ch-access_control_lists#acls-setting
@@ -286,7 +290,7 @@ there are two possibilities:
 
 [url_contact]:          mailto:{{support_email}}
 
-[url_oak]:              /docs/storage/filesystems.md#oak
+[url_oak]:              filesystems.md#oak
 
 
 [comment]: #  (footnotes -----------------------------------------------------)

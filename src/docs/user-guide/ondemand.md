@@ -1,3 +1,9 @@
+---
+icon: material/web
+tags:
+    - interactive
+---
+
 ## Introduction
 
 The Sherlock OnDemand interface allows you to conduct your research on Sherlock
@@ -22,7 +28,8 @@ traditional way, via a SSH terminal connection.
 
 [Open OnDemand][url_ood] was created by the [Ohio Supercomputer
 Center][url_osc].
-[![ood](images/ood_logo.png)][url_ood]{: .fl_right :}
+[![ood](images/ood_logo.svg#only-light)][url_ood]{: .fl_right :}
+[![ood](images/ood_logo_dark.svg#only-dark)][url_ood]{: .fl_right :}
 
 
 The following documentation is specifically intended for using OnDemand on
@@ -437,6 +444,35 @@ To start a VS Code session via Sherlock OnDemand:
 
 ![ood_code-server](images/ood_code-server.png)
 
+=======
+### AI coding assistant in code-server
+
+You can use the [Continue][url_continue] extension to connect code-server to
+an [Ollama][url_ollama] server running on a Sherlock GPU node, giving you an
+AI coding assistant without sending your code to external services.
+
+After installing Continue in code-server, the Continue icon will appear in the
+left-hand panel (or via ++ctrl+l++). Before it can be used, the extension needs
+to be [configured][url_continue_config] to point at the Ollama server.
+
+The Continue configuration file does not support environment variable
+interpolation, so the easiest approach is to set up SSH local port forwarding
+first (see [Connecting to the server][url_ollama_connect] on the Ollama page),
+then point Continue at `localhost`:
+
+``` yaml { .copy .select }
+models:
+  - name: Autodetect
+    apiBase: http://localhost:11434
+    provider: ollama
+    model: AUTODETECT
+```
+
+After that, in the Continue panel, you can start chatting with the model. More
+details are available in the [Ollama documentation][url_ollama_continue].
+
+
+>>>>>>> upstream/main
 ## Common Issues
 
 ### No Space Left on Device
@@ -544,7 +580,7 @@ To submit a ticket about your current or recent interactive session:
 [url_contact]:      mailto:{{support_email}}
 [url_oak]:          //uit.stanford.edu/service/oak-storage
 [url_osc]:          //www.osc.edu
-[url_ood]:          //openondemand.org
+[url_ood]:          //www.openondemand.org/
 [url_ood_docs]:     //www.osc.edu/resources/online_portals/ondemand
 [url_ood_logout]:   //login.sherlock.stanford.edu/logout
 
@@ -558,6 +594,22 @@ To submit a ticket about your current or recent interactive session:
 [url_running_jobs]: /docs/user-guide/running-jobs.md
 [url_connect]:      /docs/getting-started/connecting.md
 [url_r_packages]:   /docs/software/using/R.md#r-packages
+=======
+[url_storage]:      ../storage/index.md
+[url_quota]:        ../storage/index.md#quotas-and-limits
+[url_files]:        #managing-files
+[url_ncdu]:         ../storage/index.md#locating-large-directories
+[url_rclone]:       ../software/using/rclone.md
+[url_gssapi]:       ../advanced-topics/connection.md#gssapi
+[url_avoid_duo]:    ../advanced-topics/connection.md#avoiding-multiple-duo-prompts
+[url_running_jobs]: running-jobs.md
+[url_connect]:      ../getting-started/connecting.md
+[url_r_packages]:   ../software/using/R.md#r-packages
+[url_ollama]:           ../software/using/ollama.md
+[url_ollama_connect]:   ../software/using/ollama.md#connecting-to-the-server
+[url_ollama_continue]:  //ollama.com/blog/continue-code-assistant
+[url_continue]:         //www.continue.dev/
+[url_continue_config]:  //docs.continue.dev/guides/ollama-guide#how-to-configure-ollama-with-continue
 
 [comment]: #  (footnotes -----------------------------------------------------)
 

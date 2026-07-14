@@ -1,3 +1,9 @@
+---
+icon: material/expansion-card
+tags:
+    - gpu
+---
+
 To support the latest computing advancements in many fields of science,
 Sherlock features a number of compute nodes with [GPUs][url_gpu] that can be
 used to run a variety of GPU-accelerated applications. Those nodes are
@@ -31,7 +37,7 @@ batch script or command line submission options.
 For instance, the following script will request one GPU for two hours in the
 `gpu` partition, and run the GPU-enabled version of `gromacs`:
 
-``` shell
+``` shell { title="gpu_job.sbatch" .copy .select }
 #!/bin/bash
 #SBATCH -p gpu
 #SBATCH -c 10
@@ -186,7 +192,7 @@ GPU 0: Tesla P100-SXM2-16GB (UUID: GPU-4f91f58f-f3ea-d414-d4ce-faf587c5c4d4)
 !!! warning "Unsatisfiable constraints"
 
     If you specify a constraint that can't be satisfied in the partition you're
-    submitting your job to, the job will be rejected by the scheduler.     For
+    submitting your job to, the job will be rejected by the scheduler. For
     instance, requesting a RTX3090 GPU in the `gpu` partition, which doesn't
     feature any, will result in an error:
 
@@ -303,7 +309,7 @@ documentation][url_slurm_srun].
 !!! warning "Conflicting options"
 
     Given the multitude of options, it's very easy to submit a job with
-    conflicting options.  In most cases the job will be rejected.
+    conflicting options. In most cases the job will be rejected.
 
     For instance:
     ``` none
@@ -328,31 +334,27 @@ $ ml load system nvtop
 
 
 `nvtop` provides an [`htop`][url_htop]-like interactive view of GPU
-utilization.  Users can monitor, estimate and fine tune their GPU resource
-requests with this tool.  Percent GPU and memory utilization is shown as a
+utilization. Users can monitor, estimate and fine tune their GPU resource
+requests with this tool. Percent GPU and memory utilization is shown as a
 user's GPU code is running.
 
 ![nvtop](images/nvtop.png)
 
 
-[comment]: #  (# TODO: modules, cuda nvcc, nvidia-smi,  CUDA_VISIBLE_DEVICES)
-
-[comment]: #  (## Multi-GPU topologies, ## GPU mode )
-
 [comment]: #  (link URLs -----------------------------------------------------)
 
-[url_gpu]:          //blogs.nvidia.com/blog/2009/12/16/whats-the-difference-between-a-cpu-and-a-gpu/
+[url_gpu]:          //blogs.nvidia.com/blog/whats-the-difference-between-a-cpu-and-a-gpu/
 [url_slurm_sbatch]: //slurm.schedmd.com/sbatch.html#OPT_constraint
 [url_slurm_srun]:   //slurm.schedmd.com/srun.html#OPT_gpus
 [url_gpu_cmodes]:   //docs.nvidia.com/cuda/cuda-c-programming-guide/index.html#compute-modes
 [url_mig]:          //www.nvidia.com/en-us/technologies/multi-instance-gpu/
 [url_nvtop]:        //github.com/Syllo/nvtop
-[url_htop]:         //hisham.hm/htop/
+[url_htop]:         //htop.dev/
 
-[url_investing]:    /docs/concepts.md#investing-in-sherlock
-[url_modules]:      /docs/software/modules.md
-[url_ondemand]:     /docs/user-guide/ondemand.md
-[url_node_features]:/docs/advanced-topics/node-features.md
+[url_investing]:    ../concepts.md#investing-in-sherlock
+[url_modules]:      ../software/modules.md
+[url_ondemand]:     ondemand.md
+[url_node_features]:../advanced-topics/node-features.md
 
 [comment]: #  (footnotes -----------------------------------------------------)
 

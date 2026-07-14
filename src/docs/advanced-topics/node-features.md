@@ -1,8 +1,8 @@
 ---
+icon: material/server-outline
 tags:
   - slurm
   - advanced
-
 ---
 
 In heterogeneous environments, computing resources are often grouped together
@@ -45,7 +45,7 @@ The table below lists the possible features defined for each node.
 | `GPU_MEM:xxx` | GPU memory | `GPU_MEM:32GB`, `GPU_MEM:80GB` |
 | `GPU_CC:xxx`  | GPU [Compute Capability][url_gpu_cc] | `GPU_CC:6.1`, `GPU_CC:8.0` |
 | `IB:xxx`      | Infiniband generation/speed | `IB:EDR`, `IB:HDR` |
-| `NO_GPU`      | special tag set on CPU-only nodes |
+| `NO_GPU`      | special tag set on CPU-only nodes ||
 
 
 ### Listing the features available in a partition
@@ -97,14 +97,14 @@ To specify a node feature as a job constraint, the `-C`/`--constraint`
 For instance, to submit a job that should only run on an AMD Rome CPU, you can
 add the following to your job submission options:
 
-``` none
+``` shell { .copy .select }
 #SBATCH -C CPU_GEN:RME
 ```
 
 Or to make sure that your training job will run on a GPU with 80GB of GPU
 memory:
 
-``` none
+``` shell { .copy .select }
 #SBATCH -G 1
 #SBATCH -C GPU_MEM:80GB
 ```
@@ -117,7 +117,7 @@ ways, using logical operators.
 !!! danger "Many node feature combinations are impossible to satisfy"
 
     Many combinations will result in impossible conditions, and will make
-    jobs impossible to run on any node. The scheduler is usualyl able to detect
+    jobs impossible to run on any node. The scheduler is usually able to detect
     this and reject the job at submission time.
 
     For instance, submitting a job requesting an Intel CPU on the HDR IB
@@ -144,7 +144,7 @@ Some of the possible logical operations between constraints are listed below:
 Only nodes with all the requested features are eligible to run the job. The
 ampersand sign (`&`) is used as the `AND` operator. For example:
 
-``` none
+``` shell { .copy .select }
 #SBATCH -C 'GPU_MEM:32GB&IB:HDR'
 ```
 
@@ -158,9 +158,9 @@ Only nodes with at least one of specified features will be eligible to run
 the job. The pipe sign (`|`) is used as the `OR` operator.
 
 In multi-node jobs, it means that nodes allocated to the job may end up having
-different features.  For example, the following options:
+different features. For example, the following options:
 
-``` none
+``` shell { .copy .select }
 #SBATCH -N 1
 #SBATCH -C "CPU_GEN:RME|CPU_GEN:MLN"
 ```
@@ -178,7 +178,7 @@ brackets (`[`,`]`).
 For instance, the following options may be used to request a job to run on
 nodes with the same frequency, either 2.5 GHz or 2.75GHz:
 
-``` none
+``` shell { .copy .select }
 #SBATCH -C "[CPU_FRQ:2.50GHz|CPU_FRQ:2.75GHz]"
 ```
 
@@ -209,5 +209,5 @@ documentation][url_constraints_doc].
 
 [url_node-class]:       ../orders.md#configurations
 [url_catalog]:          //www.sherlock.stanford.edu/catalog
-[url_gpu_cc]:           //developer.nvidia.com/cuda-gpus
+[url_gpu_cc]:           //developer.nvidia.com/cuda/gpus
 [url_constraints_doc]:  //slurm.schedmd.com/sbatch.html#OPT_constraint

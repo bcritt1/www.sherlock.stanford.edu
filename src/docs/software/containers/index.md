@@ -1,3 +1,9 @@
+---
+title: Containers
+tags:
+    - software
+---
+
 ## Introduction
 
 Containers are a solution to the problem of how to get software to run reliably
@@ -21,7 +27,7 @@ specifically.
 
 <div class="grid cards" markdown>
 
--   :material-docker: **[Apptainer][url_apptainer]**
+- :material-docker: **[Apptainer][url_apptainer]**
 
     ---
 
@@ -31,7 +37,16 @@ specifically.
 
     [:octicons-arrow-right-24: More information][url_apptainer]
 
--   More to come...
+- :simple-nvidia: **[Enroot][url_enroot]**
+
+    ---
+
+    [Enroot][url_enroot_web] is a container runtime developed by NVIDIA that
+    runs Docker/OCI containers in unprivileged user space, with native Slurm
+    integration via the [Pyxis][url_pyxis_web] plugin.
+
+    <br/>
+    [:octicons-arrow-right-24: More information][url_enroot]
 
 
 </div>
@@ -39,10 +54,12 @@ specifically.
 
 [comment]: #  (link URLs -----------------------------------------------------)
 
-[url_apptainer_web]://apptainer.org/
+[url_apptainer_web]:  //apptainer.org/
+[url_enroot_web]:     //github.com/NVIDIA/enroot
+[url_pyxis_web]:      //github.com/NVIDIA/pyxis
 
-<!-- TODO -->
-[url_apptainer]:    singularity.md
+[url_apptainer]:      apptainer.md
+[url_enroot]:         enroot.md
 
 
 [comment]: #  (footnotes -----------------------------------------------------)

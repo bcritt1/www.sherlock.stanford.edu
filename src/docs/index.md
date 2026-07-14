@@ -1,3 +1,7 @@
+---
+icon: material/home
+---
+
 # Sherlock <small>documentation</small>
 
 <!-- HTML interlude for the main page logo -->
@@ -18,8 +22,8 @@
 
 ## Welcome to Sherlock!
 
-Sherlock is a High-Performance Computing (HPC) cluster, operated by the
-[Stanford Research Computing Center][url_srcc] to provide computing resources
+Sherlock is a High-Performance Computing (HPC) cluster, operated by
+[Stanford Research Computing][url_srcc] to provide computing resources
 to the Stanford community at large. You'll find all the documentation, tips,
 FAQs and information about Sherlock among these pages.
 
@@ -46,7 +50,7 @@ or even departmental basis.
 ### How much does it cost?
 
 Sherlock is **free** to use for anyone doing departmental or sponsored research
-at Stanford.  Any faculty member can request access for research purposes, and
+at Stanford. Any faculty member can request access for research purposes, and
 get an account with a base storage allocation and unlimited compute time on the
 global, shared pool of resources.
 
@@ -106,9 +110,67 @@ performed on Sherlock acknowledge this. The following wording is suggested:
 !!! cite "Acknowledgment"
 
     Some of the computing for this project was performed on the Sherlock
-    cluster. We would like to thank Stanford University and the Stanford
-    Research Computing Center for providing computational resources and support
+    cluster. We would like to thank Stanford University and Stanford
+    Research Computing for providing computational resources and support
     that contributed to these research results.
+
+
+## Facilities statement
+
+<!-- markdownlint-disable MD013 MD037 -->
+{% set _c = facts | selectattr("name", "equalto", "computing") | first %}
+{% set _h = facts | selectattr("name", "equalto", "hardware") | first %}
+{% set _s = facts | selectattr("name", "equalto", "storage") | first %}
+{% set _u = facts | selectattr("name", "equalto", "users") | first %}
+{% set _nodes   = _h.fields | selectattr("name", "equalto", "compute nodes") | first %}
+{% set _cores   = _c.fields | selectattr("name", "equalto", "CPU cores") | first %}
+{% set _gpus    = _c.fields | selectattr("name", "equalto", "GPUs") | first %}
+{% set _pflops  = _c.fields | selectattr("name", "equalto", "PFLOPs (FP64)") | first %}
+{% set _scratch = _s.fields | selectattr("name", "equalto", "`$SCRATCH`") | first %}
+{% set _oak     = _s.fields | selectattr("name", "equalto", "`$OAK`") | first %}
+{% set _users   = _u.fields | selectattr("name", "equalto", "user accounts") | first %}
+{% set _groups  = _u.fields | selectattr("name", "equalto", "PI groups") | first %}
+<!-- markdownlint-enable MD013 MD037 -->
+
+For grant proposals that require a description of computational resources, the
+following statement can be included:
+
+!!! cite "Facilities statement"
+
+    Sherlock is a shared High-Performance Computing (HPC) cluster operated by
+    [Stanford Research Computing][url_srcc] and available to all Stanford
+    University researchers at no cost. The system currently comprises
+    approximately
+    **{{ "{:,}".format(_nodes.value | round(-2) | int) }} compute nodes**
+    providing **{{ "{:,}".format(_cores.value | round(-3) | int) }} CPU cores**
+    and **{{ "{:,}".format(_gpus.value | round(-2) | int) }} GPUs**, with a
+    peak performance of approximately
+    **{{ _pflops.value | round(0) | int }} PFLOPs** (FP64).
+    High-performance parallel scratch storage
+    (**{{ _scratch.value | round(-6) | filesizeformat }}**) and long-term
+    research data storage (**{{ _oak.value | round(-6) | filesizeformat }}**)
+    are connected through a low-latency InfiniBand fabric.
+
+    Sherlock serves a community of over
+    **{{ "{:,}".format(_users.value | round(-2) | int) }} researchers** from
+    approximately
+    **{{ "{:,}".format(_groups.value | round(-2) | int) }} research groups**
+    across all of Stanford's seven Schools, using the Slurm workload manager.
+
+    The cluster is housed in the
+    [Stanford Research Computing Facility][url_srcf] (SRCF), a dedicated
+    research data center co-located with SLAC, providing UPS and
+    generator-protected power, energy-efficient cooling, and redundant network
+    connectivity including 100 Gbps external links. The facility is operated
+    around the clock by Stanford Research Computing's team of HPC specialists.
+
+    Access to Sherlock is provided free of charge to all Stanford researchers.
+    Faculty members may also invest in additional dedicated computing resources
+    through Sherlock's condominium model: participating faculty contribute nodes
+    to the cluster and receive guaranteed priority access to the resources they
+    purchased, as well as burst capacity beyond their contribution when those
+    resources are idle. System administration and operational support are
+    provided at no additional cost by Stanford Research Computing.
 
 
 ## Support
@@ -119,7 +181,7 @@ Research Computing support can be reached by sending an email to
 {{ support_email }} and **mentioning Sherlock**.
 
 
-!!! important "How to submit effective support requests"
+!!! tip "How to submit effective support requests"
 
     To ensure a timely and relevant response, please make sure to include some
     additional details, such as job ids, commands executed and error messages
@@ -141,7 +203,7 @@ We offer regular onboarding sessions for new Sherlock users.
     1PM-2PM PST, via [Zoom][url_ob_zoom]
 
 These one-hour sessions are a brief introduction to Sherlock's layout, its
-scheduler, the different file systems available on the cluster, as well as some
+scheduler, the different filesystems available on the cluster, as well as some
 job submission and software installation best practices for new users. They are
 a good intro course if you are new to Sherlock or HPC in general.
 
@@ -178,7 +240,7 @@ so that you can then work self-sufficiently towards a solution on your own.
 
 You'll need a [full-service SUNet ID][url_sunet] (basically, a @stanford.edu
 email address) in order to [authenticate][url_zoom] and join Office Hours via
-Zoom.  If you do not have a full service account, please contact us at {{
+Zoom. If you do not have a full service account, please contact us at {{
 support_email }}.
 
 If you can't make any of the Office Hours sessions, you can also make an
@@ -216,15 +278,16 @@ than welcome to join the following channels:
     Sherlock, want to reach out to other Sherlock users to share tips, good
     practices, tutorials or other info, please feel free to do so there.
 
-For more details about the SRCC Slack Workspace, and instructions on how to
-join this workspace and its channels, please see the Stanford Research
-Computing [support page][url_srcc_support].
+For more details about the Stanford Research Computing Slack Workspace, and
+instructions on how to join this workspace and its channels, please see
+the Stanford Research Computing [support page][url_srcc_support].
 
 !!! warning "Slack is not an official support channel"
 
     Please note that while Stanford Research Computing staff will monitor these
     channels, the official way to get support is still to email us at {{
     support_email }}.
+
 
 
 ## Quick Start
@@ -266,32 +329,34 @@ Here's what it looks like in motion:
 
 [comment]: #  (link URLs -----------------------------------------------------)
 
-[url_srcc]:         //srcc.stanford.edu
-[url_news]:         //news.sherlock.stanford.edu
-[url_status]:       //status.sherlock.stanford.edu
-[url_srcc_support]: //srcc.stanford.edu/support
-[url_shu_ml]:       //mailman.stanford.edu/mailman/listinfo/sherlock-users
-[url_sha_ml]:       //mailman.stanford.edu/mailman/listinfo/sherlock-announce
-[url_polya]:        //campus-map.stanford.edu/?id=14-160&lat=37.42898333&lng=-122.17752929&zoom=17&srch=polya%20hall
-[url_zoom]:         //stanford.zoom.us
-[url_oh_zoom]:      //stanford.zoom.us/j/95962823750?pwd=cFM2U2ZRQ243Zkx0Ry83akdtWU9zUT09
-[url_ob_zoom]:      //stanford.zoom.us/j/97524291024?pwd=Q0g3b2wvSHhPaTdtOElGRVZFOCtqdz09
-[url_ob_slides]:    //srcc.stanford.edu/workshops/sherlock-boarding-session
-[url_ob_record]:    //youtu.be/iqq7GGqMRg8
-[url_calendar]:     //calendly.com/srcc-officehours/sherlock
-[url_sunet]:        //uit.stanford.edu/service/accounts/sunetids#services
-[url_su_slack]:     //uit.stanford.edu/service/slack
-[url_sl_sha]:       //srcc.slack.com/archives/C01862L37CN
-[url_sl_shu]:       //srcc.slack.com/archives/C0192KNKYSU
+[url_srcc]:          //srcc.stanford.edu
+[url_srcf]:          //srcc.stanford.edu/facilities
+[url_news]:          //news.sherlock.stanford.edu
+[url_status]:        //status.sherlock.stanford.edu
+[url_srcc_support]:  //srcc.stanford.edu/support/slack
+[url_shu_ml]:        //mailman.stanford.edu/mailman/listinfo/sherlock-users
+[url_sha_ml]:        //mailman.stanford.edu/mailman/listinfo/sherlock-announce
+[url_polya]:         //campus-map.stanford.edu/?id=14-160&lat=37.42898333&lng=-122.17752929&zoom=17&srch=polya%20hall
+[url_zoom]:          //stanford.zoom.us
+[url_oh_zoom]:       //stanford.zoom.us/j/95962823750?pwd=cFM2U2ZRQ243Zkx0Ry83akdtWU9zUT09
+[url_ob_zoom]:       //stanford.zoom.us/j/97524291024?pwd=Q0g3b2wvSHhPaTdtOElGRVZFOCtqdz09
+[url_ob_slides]:     //srcc.stanford.edu/workshops/sherlock-boarding-session
+[url_ob_record]:     //youtu.be/iqq7GGqMRg8
+[url_calendar]:      //calendly.com/srcc-officehours/sherlock
+[url_sunet]:         //uit.stanford.edu/service/accounts/sunetids#services
+[url_su_slack]:      //uit.stanford.edu/service/slack
+[url_sl_sha]:        //srcc.slack.com/archives/C01862L37CN
+[url_sl_shu]:        //srcc.slack.com/archives/C0192KNKYSU
+[url_accessibility]: //www.stanford.edu/site/accessibility
 
-[url_docs]:         index.md
-[url_invest]:       concepts.md#investing-in-sherlock
-[url_concepts]:     concepts.md
-[url_glossary]:     glossary.md
-[url_prereq]:       getting-started/index.md
-[url_connect]:      getting-started/connecting.md
-[url_submit]:       getting-started/submitting.md
-[url_troubleshoot]: user-guide/troubleshoot.md#how-to-submit-a-support-request
+[url_docs]:          index.md
+[url_invest]:        concepts.md#investing-in-sherlock
+[url_concepts]:      concepts.md
+[url_glossary]:      glossary.md
+[url_prereq]:        getting-started/index.md
+[url_connect]:       getting-started/connecting.md
+[url_submit]:        getting-started/submitting.md
+[url_troubleshoot]:  user-guide/troubleshoot.md#how-to-submit-a-support-request
 
 [comment]: #  (footnotes -----------------------------------------------------)
 

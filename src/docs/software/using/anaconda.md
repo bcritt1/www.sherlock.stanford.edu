@@ -1,3 +1,9 @@
+---
+icon: simple/anaconda
+tags:
+    - software
+---
+
 ## Introduction
 
 Anaconda is a Python/R distribution that aims to simplify package management
@@ -82,6 +88,42 @@ modules on Sherlock,
 And that's it: your software should run, without Anaconda. If you have any
 issues, please don't hesitate to [contact us][url_contact].
 
+#### Converting a conda environment definition
+
+If you have a conda `environment.yml` file, you can extract the Python
+packages from it to use with a virtual environment:
+
+1. Open the `environment.yml` file and look for the `dependencies:` section.
+   It will typically contain a mix of conda packages and a `pip:` subsection:
+
+    ```yaml
+    dependencies:
+      - python=3.12
+      - numpy=1.26
+      - cudatoolkit=12.6    # <-- NOT a Python module, skip it
+      - cudnn=8.9           # <-- NOT a Python module, skip it
+      - pip:
+        - somepackage==1.2  # <-- Python package, keep it
+    ```
+
+2. Keep only the entries that are Python packages (i.e., packages you would
+   normally find on [PyPI][url_pypi]), and discard system-level packages like
+   `cudatoolkit`, `cudnn`, `mkl`, `openblas`, or compilers.
+3. Also keep all entries listed under the `pip:` subsection, as those are
+   always Python packages.
+4. Use the resulting list to create a `requirements.txt` file, then install
+   them in a [virtual environment][url_venv]:
+
+    ```bash
+    $ ml python/3.12.1
+    $ python -m venv myenv
+    $ source myenv/bin/activate
+    $ pip install numpy somepackage==1.2
+    ```
+
+For system-level dependencies like CUDA or MKL, load the corresponding
+Sherlock [modules][url_modules] instead (e.g., `ml cuda/12.6.1`).
+
 
 ### Use a container
 
@@ -91,8 +133,11 @@ these situations, we recommend using a [container][url_container].
 
 !!! tip
 
-    Existing Docker images can easily be converted into Apptainer/Singularity
-    images.
+    Existing Docker images can easily be converted into Apptainer
+    images. For example, to convert and use a Docker image from DockerHub:
+    ```
+    $ apptainer pull docker://<image>:<tag>
+    ```
 
 The only potential downside of using containers is their size and the
 associated storage usage. But if your research group plans on using several
@@ -104,11 +149,11 @@ container images, it could be useful to collect them all in a single location
 
 [comment]: #  (link URLs -----------------------------------------------------)
 
-[url_modules]:        /docs/software/list.md
+[url_modules]:        ../list.md
 [url_r]:              R.md
 [url_venv]:           python.md#virtual-environments
-[url_container]:      /docs/software/containers/index.md
-[url_sh_dev]:         /docs/user-guide/running-jobs.md#interactive-jobs
+[url_container]:      ../containers/index.md
+[url_sh_dev]:         ../../user-guide/running-jobs.md#interactive-jobs
 
 [url_contact]:        mailto:{{support_email}}
 

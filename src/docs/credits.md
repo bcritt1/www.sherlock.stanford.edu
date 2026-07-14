@@ -1,12 +1,17 @@
+---
+tags:
+    - overview
+---
+
 # About us
 
 ## Stanford Research Computing
 
 ![logo](images/srcc.png){ align=right width=400 loading=lazy }
 
-[Stanford Research Computing][url_srcc]) is a joint effort of the [Dean of
+[Stanford Research Computing][url_srcc] is a joint effort of the [Dean of
 Research][url_dor] and [IT Services][url_uit] to build and support a
-comprehensive program to advance computational research at Stanford.  That
+comprehensive program to advance computational research at Stanford. That
 includes offering and supporting traditional high performance computing (HPC)
 systems, as well as systems for high throughput and data-intensive computing.
 
@@ -19,10 +24,9 @@ Research Computing offers training and learning opportunities around HPC tools
 and technologies.
 
 For more information, please see the [Stanford Research Computing
-website][url_srcc]
+website][url_srcc].
 
-[url_provost]:    //provost.stanford.edu/
-[url_dor]:        //doresearch.stanford.edu/research-offices/dor-office-vice-provost-and-dean-research
+[url_dor]:        //doresearch.stanford.edu/who-we-are/office-vice-provost-and-dean-research
 [url_uit]:        //uit.stanford.edu
 [url_srcc]:       //srcc.stanford.edu
 
@@ -40,7 +44,7 @@ img[alt="favicon"] {
     height: 1rem;
 }
 img[alt="screencap"] {
-    width: 320px;
+    width: 47%;
     margin: 5px;
 }
 </style>
@@ -53,7 +57,7 @@ img[alt="screencap"] {
 
 The Sherlock website and documentation also rely on the following projects:
 
-* ![favicon](//www.mkdocs.org/img/favicon.ico) [MkDocs](//mkdocs.org/)
+* ![favicon](//www.mkdocs.org/img/favicon.ico) [MkDocs](//www.mkdocs.org/)
 * ![favicon](//squidfunk.github.io/mkdocs-material/assets/favicon.png)
   [Material for MkDocs](//squidfunk.github.io/mkdocs-material/)
 
@@ -82,7 +86,7 @@ Yes, exactly. That's Sherlock.
 
 ## Sherlock, of HBO fame
 
-And finally, we couldn't resist to the pleasure of citing the most
+And finally, we couldn't resist the pleasure of citing the most
 prestigious accomplishment of Sherlock to date: a mention in [HBO's Silicon
 Valley][url_sv] [Season 4 finale][url_ep38]!
 
@@ -92,12 +96,12 @@ Valley][url_sv] [Season 4 finale][url_ep38]!
 Yep, you got that right, [Richard Hendricks][url_richard] wanted to use our
 very own Sherlock!
 
-![compression_stars](images/compression_stars.png){ align=left
-style="height:100px; margin-top:0" } Kudos to the show's crew and a big thank
+![compression_stars](images/compression_stars.png){ align=left style="height:160px; margin-top:0" } <!-- markdownlint-disable-line MD013 -->
+Kudos to the show's crew and a big thank
 you to [HBO Data compression stars][url_ieee], Professor [Tsachy
 Weissman][url_tsachy] and Dmitri Pavlichin, for this incredible Sherlock
 shout-out. This has been an everlasting source of pride and amazement for the
-whole SRCC team! :heart:{ .pulsate }
+whole Stanford Research Computing team! :heart:{ .pulsate }
 
 
 [comment]: #  (link URLs -----------------------------------------------------)

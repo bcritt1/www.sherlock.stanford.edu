@@ -1,3 +1,8 @@
+---
+icon: material/shield-lock-outline
+tags:
+    - storage
+---
 
 !!! Warning "Data protection is mostly a task for the user"
 
@@ -8,8 +13,8 @@
 
 ## Snapshots
 
-File system snapshots represent the state of the file system at a particular
-point in time. They allow accessing the file system contents as it was a
+Filesystem snapshots represent the state of the filesystem at a particular
+point in time. They allow accessing the filesystem contents as it was a
 different times in the past, and get back data that may have been deleted or
 modified since the snapshot was taken.
 
@@ -24,7 +29,7 @@ directory at any level of the hierarchy. Those `.snapshot` directories don't
 appear when listing directory contents with `ls`, but they can be listed
 explicitly or accessed with `cd`:
 
-``` shell
+``` none
 $ cd $HOME
 $ ls -ald .snapshot/users*
 [...]
@@ -86,7 +91,7 @@ Examples:
 ### Snapshot policy
 
 The current[^snap_policy] policy is to take snapshots on an hourly, daily and
-weekly basis.  Older snapshots automatically expire after their retention
+weekly basis. Older snapshots automatically expire after their retention
 period. The snapshot policy applies to both `$HOME` and `$GROUP_HOME` storage
 spaces.
 
@@ -135,7 +140,7 @@ Suggested options to backup your data include:
 [url_uit_storage]:      //uit.stanford.edu/service/storage
 [url_uit_backup]:       //uit.stanford.edu/services/category/backup-and-storage
 
-[url_datatransfer]:     /docs/storage/data-transfer.md
+[url_datatransfer]:     data-transfer.md
 
 [comment]: #  (footnotes -----------------------------------------------------)
 

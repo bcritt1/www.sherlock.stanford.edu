@@ -1,3 +1,9 @@
+---
+icon: material/atom
+tags:
+    - software
+---
+
 ## Introduction
 
 [Quantum ESPRESSO][url_qe] is an integrated suite of Open-Source computer codes
@@ -19,7 +25,7 @@ their own ideas into existing codes.
 ### More documentation
 
 The following documentation specifically intended for using Quantum Espresso on
-Sherlock.  For more complete documentation about Quantum Espresso in general,
+Sherlock. For more complete documentation about Quantum Espresso in general,
 please see the [Quantum Espresso documentation][url_qe_docs].
 
 
@@ -31,26 +37,26 @@ modules][url_soft_qe], or run it from a container.
 The CPU version of Quantum Espresso can be loaded via the `quantum-espresso`
 module:
 
-```bash
+``` none
 $ ml chemistry quantum-espresso
 ```
 
 and the GPU version can be loaded via the `quantum-espresso_gpu` module:
 
-```bash
+``` none
 $ ml chemistry quantum-espresso_gpu
 ```
 
 
 ## Examples
 
-Here are a few examples showing how to run the AUSURF112 benchmark.
+Here are a few examples showing how to run the `AUSURF112` benchmark.
 
 ### Preparation
 
 The first step is to get the benchmark files:
 
-```bash
+``` none
 $ cd $SCRATCH
 $ git clone https://github.com/QEF/benchmarks qe_benchmarks
 $ cd qe_benchmarks/AUSURF112
@@ -58,7 +64,7 @@ $ cd qe_benchmarks/AUSURF112
 
 ### CPU version
 
-To submit a Quantum Espresso job to run the AUSURF112 benchmark on CPU nodes,
+To submit a Quantum Espresso job to run the `AUSURF112` benchmark on CPU nodes,
 the following submission script can be used:
 
 === "qe-bench_cpu.sbatch"
@@ -88,7 +94,7 @@ ends.
 
 The job can be submitted with:
 
-```bash
+``` none
 $ sbatch qe-bench_cpu.sbatch
 ```
 
@@ -128,7 +134,7 @@ and will send an email notification when the job starts and when it ends.
 
 It can be submitted with:
 
-```bash
+``` none
 $ sbatch qe-bench_gpu.sbatch
 ```
 
@@ -141,19 +147,19 @@ container.
 The NVIDIA GPU Cloud ([NGC][url_ngc]) hosts a [Quantum Espresso
 container][url_ngc_qe] container that could be used on Sherlock.
 
-##### With Singularity
+##### With Apptainer
 
-To use the container with Singularity, first pull the Quantum Espresso
+To use the container with Apptainer, first pull the Quantum Espresso
 container with:
 
-```shell
+``` none
 $ cd $SCRATCH
-$ singularity pull docker://nvcr.io/hpc/quantum_espresso:qe-7.0
+$ apptainer pull docker://nvcr.io/hpc/quantum_espresso:qe-7.0
 ```
 
 Then create the following script:
 
-=== "qe-bench_gpu_singularity.sbatch"
+=== "qe-bench_gpu_apptainer.sbatch"
     ```
     #!/bin/bash
     #SBATCH --partition=gpu          # partition to submit the job to
@@ -167,7 +173,7 @@ Then create the following script:
     cd $SCRATCH/qe_benchmarks
     cd AUSURF112
 
-    srun singularity run --nv \
+    srun apptainer run --nv \
         $SCRATCH/quantum_espresso_qe-7.0.sif \
         pw.x -input ausurf.in -npool 2
 
@@ -175,8 +181,8 @@ Then create the following script:
 
 and submit it:
 
-```bash
-$ sbatch qe-bench_gpu_singularity.sbatch
+``` none
+$ sbatch qe-bench_gpu_apptainer.sbatch
 ```
 
 ##### With pyxis/enroot
@@ -205,8 +211,8 @@ script:
 
 and submit it:
 
-```bash
-$ sbatch qe-bench_gpu_singularity.sbatch
+``` none
+$ sbatch qe-bench_gpu_apptainer.sbatch
 ```
 
 
@@ -216,10 +222,10 @@ $ sbatch qe-bench_gpu_singularity.sbatch
 
 [url_qe]:           //www.quantum-espresso.org
 [url_qe_docs]:      //www.quantum-espresso.org/documentation/
-[url_spof_qe]:      /docs/software/list/#quantum-espresso
+[url_soft_qe]:      ../list.md#quantum-espresso
 
-[url_ngc]:          //ngc.nvidia.com
-[url_ngc_qe]:       //ngc.nvidia.com/catalog/containers/hpc:quantum_espresso
+[url_ngc]:          //catalog.ngc.nvidia.com/
+[url_ngc_qe]:       //catalog.ngc.nvidia.com/orgs/hpc/containers/quantum_espresso
 
 [comment]: #  (footnotes -----------------------------------------------------)
 

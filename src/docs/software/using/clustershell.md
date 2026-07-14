@@ -1,11 +1,17 @@
+---
+icon: material/console
+tags:
+    - software
+---
+
 ## Introduction
 
 [ClusterShell][url_clush] is a command-line tool and library that helps running
 commands in parallel on multiple servers. It allows executing arbitrary
 commands across multiple hosts. On Sherlock, it provides an easy way to run
-commands on nodes your jobs are running on, and collect back information.  The
+commands on nodes your jobs are running on, and collect back information. The
 two most useful commands provided are `cluset`, which can manipulate lists of
-nodenames, and `clush`, which can run commands on multiple nodes at once.
+node names, and `clush`, which can run commands on multiple nodes at once.
 
 
 ### More documentation
@@ -240,7 +246,7 @@ sh02-12n04: /share/software/user/open/python/3.6.1/bin/python3.6, 15943 MiB
 
 [comment]: #  (link URLs -----------------------------------------------------)
 
-[url_clush]:        //cea-hpc.github.io/clustershell/
+[url_clush]:        //clustershell.github.io/clustershell/
 [url_clush_docs]:   //clustershell.readthedocs.io/
 [url_doc_cluset]:   //clustershell.readthedocs.io/en/latest/tools/cluset.html
 [url_doc_clush]:    //clustershell.readthedocs.io/en/latest/tools/clush.html

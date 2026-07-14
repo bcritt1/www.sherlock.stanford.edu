@@ -1,4 +1,5 @@
 ---
+icon: material/login
 tags:
     - connection
 ---
@@ -38,7 +39,7 @@ typing the `ssh` command in a terminal window.
 To login to Sherlock, open a terminal and type the following command, where
 `<sunetid>` should be replaced by your *actual* SUNet ID:
 
-``` shell
+``` none
 $ ssh <sunetid>@login.sherlock.stanford.edu
 ```
 
@@ -102,7 +103,7 @@ Passcode or option (1-3):
 !!! tip "Avoiding two-factor prompt on each connection"
 
     If you routinely open multiple sessions to Sherlock, having to confirm each
-    one of them with a second authentication factor could rapidely become
+    one of them with a second authentication factor could rapidly become
     cumbersome. To work around this, the OpenSSH client allows multiplexing
     channels and re-using existing authenticated for opening new sessions.
     Please see the [Advanced Connection Options][url_avoid_duo] page for more
@@ -120,7 +121,7 @@ If your second factor is accepted, you'll see the following message:
 If you ever encounter timeout errors when connecting to Sherlock, like
 these:
 
-``` shell
+``` none
 $ ssh login.sherlock.stanford.edu
 ssh: connect to host login.sherlock.stanford.edu port 22: Operation timed out
 
@@ -156,8 +157,8 @@ minutes.
 !!! warning "SSHFS on macOS"
 
     SSHFS on macOS is known to try to [automatically reconnect][url_sshfs]
-    filesystem mounts after resuming from sleep or uspend, even without any
-    valid credentials.  As a result, it will generate a lot of failed
+    filesystem mounts after resuming from sleep or suspend, even without any
+    valid credentials. As a result, it will generate a lot of failed
     connection attempts and likely make your IP address blacklisted on login
     nodes.
 
@@ -249,7 +250,7 @@ section][url_submit].
 [url_suaccounts]:   //accounts.stanford.edu/
 [url_sunet]:        //uit.stanford.edu/service/accounts/sunetids
 [url_minsec]:       //uit.stanford.edu/guide/securitystandards
-[url_twostep]:      //uit.stanford.edu/service/webauth/twostep
+[url_twostep]:      //uit.stanford.edu/service/authentication/twostep
 [url_vpn]:          //uit.stanford.edu/service/vpn
 
 [url_contact]:      mailto:{{support_email}}
@@ -257,10 +258,10 @@ section][url_submit].
 [url_prereq]:       index.md#prerequisites
 [url_account]:      index.md#how-to-request-an-account
 [url_submit]:       submitting.md
-[url_avoid_duo]:    /docs/advanced-topics/connection.md#avoiding-multiple-duo-prompts
-[url_other_auth]:   /docs/advanced-topics/connection.md#authentication-methods
-[url_sshfs]:        /docs/storage/data-transfer.md#sshfs
-[url_login]:        /docs/glossary.md#login-nodes
+[url_avoid_duo]:    ../advanced-topics/connection.md#avoiding-multiple-duo-prompts
+[url_other_auth]:   ../advanced-topics/connection.md#authentication-methods
+[url_sshfs]:        ../storage/data-transfer.md#sshfs
+[url_login]:        ../glossary.md#login-nodes
 
 [comment]: #  (footnotes -----------------------------------------------------)
 

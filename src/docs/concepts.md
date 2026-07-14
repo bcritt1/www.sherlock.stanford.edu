@@ -1,3 +1,9 @@
+---
+icon: material/lightbulb-outline
+tags:
+    - overview
+---
+
 ## Sherlock, a shared resource
 
 Sherlock is a shared compute cluster available for use by all Stanford faculty
@@ -22,7 +28,7 @@ required for all user accounts.
     Please note that your use of this system falls under the "Computer and
     Network Usage Policy", as described in the [Stanford Administrative
     Guide][url_admin]. In particular, sharing authentication credentials is
-    strictly prohibited.  Violation of this policy will result in termination
+    strictly prohibited. Violation of this policy will result in termination
     of access to Sherlock.
 
 
@@ -34,9 +40,9 @@ a comprehensive program to advance computational research at Stanford.
 Sherlock has been initially purchased and supported with seed funding from
 Stanford's [Provost][url_provost]. It comprises a set of freely available
 compute nodes, a few specific resources such as large-memory machines and GPU
-servers, as well as the associated networking equipment and storage.  These
+servers, as well as the associated networking equipment and storage. These
 resources can be used to run computational codes and programs, and are managed
-through a job scheduler using a [fair-share algorithm][url_fairshare].
+through a job scheduler using a [fairshare algorithm][url_fairshare].
 
 ### Data risk classification
 
@@ -48,7 +54,7 @@ through a job scheduler using a [fair-share algorithm][url_fairshare].
 
     Sherlock is **NOT** approved to store or process [HIPAA][url_HIPAA],
     [PHI][url_PHI], [PII][url_PII] nor any kind of [High Risk][url_datarisk]
-    data.  The system is approved for computing with Low and Moderate Risk data
+    data. The system is approved for computing with Low and Moderate Risk data
     only, and is **not suitable to process High Risk data**.
 
     :fontawesome-solid-circle-exclamation: **Users are responsible for ensuring
@@ -119,7 +125,7 @@ nodes on Sherlock provides:
 Those benefits come in addition to the other Sherlock advantages:
 
 * access to high-performance, large parallel scratch storage space
-* access to snapshot'ed, replicated, enterprise-class storage space
+* access to enterprise-class storage space with snapshots and off-site replication
 * optimized software stack, especially tailored for a range of research needs
 * tools to build and install additional software applications as needed
 * user support
@@ -149,7 +155,7 @@ accessible from the outside, which means that they can't host public services
 like web or application servers.
 
 :fontawesome-solid-xmark:{ .chk_no } **bypassing the scheduler**: jobs running
-on owners' nodes still need to be submitted to the scheduler.  Direct shell
+on owners' nodes still need to be submitted to the scheduler. Direct shell
 access to the nodes is not possible outside of scheduled interactive sessions.
 
 :fontawesome-solid-xmark:{ .chk_no } **hardware changes**: the hardware
@@ -184,7 +190,7 @@ Feel free to [contact us][email] is you have any additional question.
 
 The research computing landscape evolves very quickly, and to both accommodate
 growth and technological advances, it's necessary to adapt the Sherlock
-environment to these evolutions.
+environment to these changes.
 
 Every year or so, a new generation of processors is released, which is why,
 over a span of several years, multiple generations of CPUs and GPUs make their
@@ -221,7 +227,7 @@ capacity again, and the same process will happen again to start the next
 generation of Sherlock.
 
 
-## Maintenances and upgrades
+## Maintenance and upgrades
 
 Stanford Research Computing institutes a monthly scheduled maintenance window
 on Sherlock, to ensure optimal operation, avoid potential issues and prepare
@@ -230,14 +236,14 @@ software and firmware updates, and perform general manufacturer recommended
 maintenance on our environment.
 
 As often as possible, maintenance tasks are performed in a rolling,
-non-disruptive fashion, but downtimes are sometimes an unfortunate necessity to
+non-disruptive fashion, but outages are sometimes an unfortunate necessity to
 allow disruptive operations that can't be conducted while users are working on
 the system.
 
 
 !!! info "Maintenance schedule"
 
-    As often as possible, maintenances will take place on the **first Tuesday
+    As often as possible, maintenance windows will take place on the **first Tuesday
     of every month, from 08:00 to 12:00 Pacific time** (noon), and will be
     announced 2 weeks in advance, through the usual communication channels.
 
@@ -252,13 +258,13 @@ by the maintenance window would be pushed after it.
 
 ### Common questions
 
-**Q: Why doing maintenances at all?**
+**Q: Why do maintenance at all?**
 
 **A**: Due to the scale of our computing environment and the increasing
 complexity of the systems we deploy, it is prudent to arrange for a
 regular time when we can comfortably and without pressure fix problems or
 update facilities with minimal impact to our customers. Most, if not all, major
-HPC centers have regular maintenance schedules.  We also need to enforce the
+HPC centers have regular maintenance schedules. We also need to enforce the
 [Minimum Security][url_minsec] rules instituted by the Stanford Information
 Security Office, which mandate deployment of security patches in a timely
 manner.
@@ -273,8 +279,8 @@ and available to assist in repairs and quickly restore service.
 
 **Q: I have jobs running, what will happen to them?**
 
-**A:** For long-running jobs, we strongly recommend checkpointing your results
-on a periodic basis. Besides, we will place a reservation in the scheduler for
+**A:** For long-running jobs, we strongly recommend saving periodic checkpoints
+of your results. Besides, we will place a reservation in the scheduler for
 each maintenance that would prevent jobs to run past it. This means that the
 scheduler will only allow jobs to run if they can finish by the time the
 maintenance starts. If you submit a long job soon before the maintenance, it
@@ -287,7 +293,7 @@ lost when the maintenance starts.
 
 [email]:          mailto:{{support_email}}
 [url_provost]:    //provost.stanford.edu/
-[url_dor]:        //doresearch.stanford.edu/research-offices/dor-office-vice-provost-and-dean-research
+[url_dor]:        //doresearch.stanford.edu/who-we-are/office-vice-provost-and-dean-research
 [url_srcc]:       //srcc.stanford.edu/
 [url_uit]:        //uit.stanford.edu
 [url_risk]:       //uit.stanford.edu/guide/riskclassifications
@@ -298,8 +304,8 @@ lost when the maintenance starts.
 [url_admin]:      //adminguide.stanford.edu
 [url_fairshare]:  //slurm.schedmd.com/fair_tree.html
 [url_orders]:     orders.md
-[url_recurring]:  user-guide/running-jobs.md#recurring-jobs
-[url_persistent]: user-guide/running-jobs.md#persistent-jobs
+[url_recurring]:  advanced-topics/service-jobs.md#recurring-jobs
+[url_persistent]: advanced-topics/service-jobs.md#persistent-jobs
 [url_lscratch]:   storage/filesystems.md#l_scratch
 
 [url_HIPAA]: //en.wikipedia.org/wiki/Health_Insurance_Portability_and_Accountability_Act

@@ -1,3 +1,9 @@
+---
+icon: simple/julia
+tags:
+    - software
+---
+
 ## Introduction
 
 [Julia][url_julia] is a high-level general-purpose dynamic programming language
@@ -19,7 +25,7 @@ documentation][url_julia_docs].
 Julia is available on Sherlock and the corresponding [module][url_modules] can
 be loaded with:
 
-``` shell
+``` none
 $ ml julia
 ```
 
@@ -32,7 +38,7 @@ Sherlock prompt, or refer to the [Software list page][url_software_list].
 Once your environment is configured (_ie._ when the `julia` module is loaded),
 julia can be started by simply typing julia at the shell prompt:
 
-``` shell
+``` none
 $ julia
 
 _
@@ -49,7 +55,7 @@ julia>
 
 For a listing of command line options:
 
-``` shell
+``` none
 $ julia --help
 
 julia [switches] -- [programfile] [args...]
@@ -86,14 +92,14 @@ mode.
 Here is an example where we create a simple [Hello World][url_helloworld]
 program and launch it with Julia
 
-``` shell
+``` none
 $ echo 'println("hello world")' > helloworld.jl
 ```
 
 
 That script can now simply be executed by calling `julia <script_name>`:
 
-``` shell
+``` none
 $ julia helloworld.jl
 hello world
 ```
@@ -122,14 +128,14 @@ Here's an example Julia sbatch script that can be submitted via `sbatch`:
 You can save this script as `julia_test.sbatch` and submit it to the scheduler
 with:
 
-``` shell
+``` none
 $ sbatch julia_test.sbatch
 ```
 
 Once the job is done, you should get a `julia_test.log` file in the current
 directory, with the following contents:
 
-``` shell
+``` none
 $ cat julia_test.log
 hello world
 ```
@@ -154,7 +160,7 @@ julia> Pkg.status()
 
 !!! tip "Julia packages only need to be installed once"
 
-    You only need to install Julia packages once on Sherlock. Since fielsystems
+    You only need to install Julia packages once on Sherlock. Since filesystems
     are shared, packages installed on one node will immediately be available on
     all nodes on the cluster.
 
@@ -235,8 +241,8 @@ No packages installed.
 
 #### Parallel job
 
-Julia can natively spawn parallel workers across multiple compute nodes,
-without using MPI. There are two main modes of operation:
+Julia can spawn parallel workers across multiple compute nodes without using
+MPI. There are two main modes of operation:
 
 1. ClusterManager: in this mode, you can spawn workers from within the Julia
    interpreter, and each worker will actually submit jobs to the scheduler,
@@ -278,7 +284,7 @@ You can submit the following job:
 
 Save as `julia_test.sbatch`, and then:
 
-``` shell
+``` none
 $ sbatch  julia_test.sbatch
 ```
 

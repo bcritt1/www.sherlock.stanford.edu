@@ -1,3 +1,9 @@
+---
+icon: simple/rclone
+tags:
+    - software
+---
+
 ## Introduction
 
 If you need to sync files between cloud storage to Sherlock,
@@ -31,7 +37,7 @@ first time.
 When running `rclone config` you will be prompted to enter names and values,
 indicated by the `>` symbol. To leave it empty, press Enter.
 
-```shell
+``` none
 # Connect to Sherlock with local port fowarding
 $ ssh -L localhost:53682:localhost:53682 <SUNetID>@login.sherlock.stanford.edu
 
@@ -122,7 +128,7 @@ will be asked to confirm that you want to allow `rclone` to access your files.
 Once you have successfully done so, you can complete the configuration in the
 terminal.
 
-```shell
+``` shell
 Configure this as a Shared Drive (Team Drive)?
 
 y) Yes
@@ -163,7 +169,7 @@ e/n/d/r/c/s/q> q
 To transfer data between cloud storage and Sherlock or Oak, you can use the
 `rclone copy` command.
 
-``` shell
+``` none
 # Start an interactive dev session
 $ sh_dev
 
@@ -182,7 +188,7 @@ $ rclone copy /oak/stanford/groups/<group name>/<file name> gdrive:
 To view the files and folders in your cloud storage, you can use the `rclone
 ls` and `rclone lsd` commands, respectively.
 
-```shell
+``` none
 # Load the rclone module
 $ ml system rclone
 

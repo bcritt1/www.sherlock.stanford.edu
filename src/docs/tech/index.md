@@ -27,7 +27,7 @@ Sherlock features over **{{ get_value("hardware", "compute nodes", rnd=-2)
 }}** compute nodes, **{{ get_value("computing", "CPU cores", rnd=-2) }}+** CPU
 cores and **{{ get_value("computing", "GPUs", rnd=-2) }}+** GPUs, for a total
 computing power of more than **{{ get_value("computing", "PFLOPs (FP64)", rnd=1) }}**
-Petaflops. That would rank it in the Top500 list of the most powerful
+PFLOPs. That would rank it in the Top500 list of the most powerful
 supercomputers in the world.
 
 The cluster currently extends {{ get_value("networking", "Infiniband switches",
@@ -71,11 +71,13 @@ generations, with numerous contributions from many research groups on campus.
 
 
 <style>
-th:nth-child(2)  { min-width: 0 !important;
+th:nth-child(2)  { min-width: 0 !important; }
 </style>
 
+<!-- markdownlint-disable MD055 MD056 -->
+
 | Type  | Access | Nodes | CPU cores | Details |
-| ---   | :---:   | ---:  | ---:      | ---     |
+| ---   | :---:  | ---:  | ---:      | ---     |
 {%- set partitions = facts | selectattr("name", "==", "partitions") | first -%}
 {%- for part in partitions.fields %}
 | {{ part.desc }}<br/><small>**`{{ part.name }}`** partition</small>  | {{ part.access
@@ -97,6 +99,7 @@ th:nth-child(2)  { min-width: 0 !important;
 {%- endfor %}
 | **Total** | | **{{ get_value("hardware", "compute nodes") }} :octicons-server-24:** | **{{ get_value("computing", "CPU cores") }} :octicons-cpu-24:** | **{{ get_value("computing", "GPUs") }} :material-expansion-card:** |
 
+<!-- markdownlint-enable MD055 MD056 -->
 
 
 ### Storage
@@ -106,7 +109,7 @@ th:nth-child(2)  { min-width: 0 !important;
     For more information about storage options on Sherlock, please refer to the
     [Storage section][url_storage] of the documentation.
 
-Sherlock is architected around shared storage components, meaning that users
+Sherlock is built around shared storage components, meaning that users
 can find the same files and directories from all of the Sherlock nodes.
 
 * Highly-available NFS filesystem for user and group home directories (with
@@ -125,12 +128,12 @@ can find the same files and directories from all of the Sherlock nodes.
 [url_status]:   //status.sherlock.stanford.edu
 [url_oak]:      //uit.stanford.edu/service/oak-storage
 
-[url_gpus]:     /docs/user-guide/gpu.md
-[url_storage]:  /docs/storage/index.md
-[url_login]:    /docs/user-guide/running-jobs.md#login-nodes
-[url_dtn]:      /docs/storage/data-transfer.md#data-transfer-nodes-dtns
-[url_clugens]:  /docs/concepts.md#cluster-generations
-[url_owners]:   /docs/concepts.md#investing-in-sherlock
+[url_gpus]:     ../user-guide/gpu.md
+[url_storage]:  ../storage/index.md
+[url_login]:    ../user-guide/running-jobs.md#login-nodes
+[url_dtn]:      ../storage/data-transfer.md#data-transfer-nodes-dtns
+[url_clugens]:  ../concepts.md#cluster-generations
+[url_owners]:   ../concepts.md#investing-in-sherlock
 
 
 

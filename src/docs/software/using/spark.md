@@ -1,6 +1,12 @@
+---
+icon: simple/apachespark
+tags:
+    - software
+---
+
 ## Introduction
 
-Apache Spark™ is a general engine for large-scale data processing.  This
+Apache Spark™ is a general engine for large-scale data processing. This
 document gives a quick introduction how to get a first test program in Spark
 running on Sherlock.
 
@@ -16,7 +22,7 @@ Spark documentation][url_spark].
 
 Running Apache Spark on Sherlock is a bit different from using a traditional
 Spark/Hadoop cluster in that it requires some level of integration with the
-scheduler.  In a sense, the computing resources (memory and CPU) need to be
+scheduler. In a sense, the computing resources (memory and CPU) need to be
 allocated twice. First, sufficient resources for the Spark application need to
 be allocated via Slurm ; and secondly, `spark-submit` resource allocation flags
 need to be properly specified.
@@ -39,7 +45,7 @@ node][url_compute_node], which makes for a fairly simply sbatch script. The
 following example will start a 8-core job on a single node, and run a Spark
 task within that allocation:
 
-``` shell
+``` shell { title="spark_singlenode.sbatch" .copy .select }
 #!/bin/bash
 
 #SBATCH --job-name=spark_singlenode
@@ -65,7 +71,7 @@ To start a Spark cluster and run a task on multiple nodes, more preliminary
 steps are necessary. Here's an example script that will span 2 nodes, start 2
 Spark workers on each node, and allow each worker to use 8 cores:
 
-``` shell
+``` shell { title="spark_multinode.sbatch" .copy .select }
 #!/bin/bash
 #SBATCH --nodes=2
 #SBATCH --mem-per-cpu=4G
@@ -138,7 +144,7 @@ stop-master.sh
 
 [url_spark]:        //spark.apache.org/
 
-[url_compute_node]: /docs/glossary.md#node
+[url_compute_node]: ../../glossary.md#node
 
 
 --8<--- "includes/_acronyms.md"

@@ -1,3 +1,9 @@
+---
+icon: material/package
+tags:
+    - software
+---
+
 # Software <small>on Sherlock</small>
 
 ## Available software
@@ -19,7 +25,7 @@ Software Licensing office][url_software_lic].
 
     The Stanford Research Computing team installs, for general use, a set of
     libraries, tools and software applications that are commonly used across
-    many research groups.  However, our staff resources are quite limited and
+    many research groups. However, our staff resources are quite limited and
     don't allow us to build nor maintain custom software applications that may
     be requested by or be of use to a small number of users.
 
@@ -40,11 +46,11 @@ the use of their own custom software installations.
 
 If the software you need is not in the [list of available software][url_list],
 and you have trouble installing it on your own, please [contact
-us][url_contact] with ^^as much details about the package as possible^^, and we
+us][url_contact] with ^^as many details about the package as possible^^, and we
 will try to help you install it.
 
 If it's a widely used software that could benefit multiple users across
-different scientific communities, we will consider install it globally as
+different scientific communities, we will consider installing it globally as
 resources permit[^install_req].
 
 

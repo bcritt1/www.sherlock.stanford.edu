@@ -1,6 +1,8 @@
 ---
+icon: material/lan-connect
 tags:
     - connection
+    - advanced
 ---
 
 # Advanced connection options
@@ -19,14 +21,14 @@ and bypass the automatic load-balanced dispatching of new connections
 (which **we don't recommend**), you can use that login node's hostname
 explicitly. For instance:
 
-``` shell
+``` none
 $ ssh <sunetid>@ln21.sherlock.stanford.edu
 ```
 
 This can be useful if you run long-standing processes on the login nodes, such
-as [screen][url_screen] or [tmux][url_tmux] sessions. To find them back when you
-reconnect to Sherlock, you will indeed need to login to the same login node you
-started them on.
+as [`screen`][url_screen] or [`tmux`][url_tmux] sessions. To find them back
+when you reconnect to Sherlock, you will indeed need to login to the same login
+node you started them on.
 
 The drawback is that by connecting to a specific login node, you will forfeit
 the load-balancing benefits, which could result in a crowded environment, or
@@ -92,7 +94,7 @@ test that your Kerberos installation works by running `kinit
 <sunetid>@stanford.edu`. You should get a password prompt, and upon success,
 you'll be able to list your Kerberos credentials with the `klist` command:
 
-``` shell
+``` none
 $ kinit kilian@stanford.edu
 Password for kilian@stanford.edu:
 $ klist
@@ -116,7 +118,7 @@ open to Sherlock for several days without any issue.
 
 You're now ready to connect to Sherlock using GSSAPI. Simply SSH as usual:
 
-``` shell
+``` none
 $ ssh <sunetid>@login.sherlock.stanford.edu
 ```
 
@@ -135,6 +137,13 @@ OpenSSH offers a variety of configuration options that you can use in
 the options you can use with Sherlock that may make connecting and transferring
 files more convenient.
 
+!!! note "Compression"
+
+    Enabling SSH compression (`Compression yes`) is generally **not**
+    recommended on fast networks, as the CPU overhead typically outweighs the
+    bandwidth savings. It may help on slow or high-latency connections such as
+    when [connecting from abroad](#connecting-from-abroad).
+
 ### Avoiding multiple Duo prompts
 
 In order to avoid getting a second-factor (Duo) prompt every time you want to
@@ -146,7 +155,7 @@ machine to activate the `ControlMaster` option. If you already have a `Host
 login.sherlock.stanford.edu` block in your configuration file, simply add the
 `Control*` option lines in the same block.
 
-``` shell
+``` shell { .copy .select }
 Host login.sherlock.stanford.edu
     ControlMaster auto
     ControlPath ~/.ssh/%l%r@%h:%p
@@ -178,7 +187,21 @@ load-balancing mechanism used by the login nodes.
 
 
 
-[comment]: #  ( TODO: Network, Ciphers )
+### Ciphers
+
+OpenSSH negotiates the encryption cipher automatically, and modern versions
+will default to fast, hardware-accelerated ciphers such as
+`aes128-gcm@openssh.com` or `chacha20-poly1305@openssh.com` when both client
+and server support them. **You should not need to change this** in the vast
+majority of cases.
+
+If you are transferring very large amounts of data over SSH and have a specific
+reason to override the cipher, you can do so in your `~/.ssh/config`:
+
+``` shell { .copy .select }
+Host login.sherlock.stanford.edu
+    Ciphers aes128-gcm@openssh.com,aes256-gcm@openssh.com,chacha20-poly1305@openssh.com
+```
 
 
 
@@ -190,7 +213,7 @@ load-balancing mechanism used by the login nodes.
     VPN][url_vpn] when connecting from untrusted networks.
 
 Access to Sherlock is not restricted to campus, meaning that you can connect to
-Sherlock from pretty much anywhere, including when traveling abroad.  We don't
+Sherlock from pretty much anywhere, including when traveling abroad. We don't
 restrict inbound SSH connections to any specific IP address range or
 geographical location, so you shouldn't have any issue to reach the login nodes
 from anywhere.
@@ -210,7 +233,7 @@ notifications are not available.
 [url_tmux]:         //github.com/tmux/tmux/wiki
 [url_kerberos]:     //uit.stanford.edu/service/kerberos
 [url_vpn]:          //uit.stanford.edu/service/vpn
-[url_alt2fa]:       //uit.stanford.edu/service/webauth/twostep
+[url_alt2fa]:       //uit.stanford.edu/service/authentication/twostep
 
 [comment]: #  (footnotes -----------------------------------------------------)
 

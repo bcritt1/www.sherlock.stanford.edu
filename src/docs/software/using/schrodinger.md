@@ -1,3 +1,9 @@
+---
+icon: material/molecule
+tags:
+    - software
+---
+
 ## Introduction
 
 The [Schrödinger][url_schrodinger] suite is a commercial and licensed software
@@ -17,7 +23,8 @@ contact [Schrödinger support][url_schrodinger_support].
 ### Licensing
 
 [Stanford Libraries][url_sul] have purchased a site license for the Schrödinger
-suite.  Please contact Stanford Libraries at sciencelibrary@stanford.edu and CC
+suite. Please contact Stanford Libraries at
+[sciencelibrary@stanford.edu](mailto:sciencelibrary@stanford.edu) and CC
 {{ support_email }} if you would like to access Schrödinger on Sherlock: after
 we receive confirmation, your PI group will be granted access on Sherlock.
 
@@ -27,13 +34,13 @@ You can use Schrödinger software after having loaded the corresponding
 [software module][url_modules] with the `module` command. To load the current
 default version:
 
-```bash
+``` bash
 module load chemistry schrodinger
 ```
 
 To see all the available versions, you can use the `module spider` command:
 
-```bash
+``` none
 $ module spider schrodinger
 ```
 
@@ -41,19 +48,19 @@ Once loaded, the `$SCHRODINGER` environment variable is automatically set to
 allow all Schrödinger commands to run. For example, to run the `jaguar`
 command:
 
-```bash
+``` none
 $ jaguar run -WAIT H20.in
 ```
 
 To call the basic Schrödinger `run` command, just enter:
 
-```bash
+``` none
 $ run
 ```
 
 or `glide`:
 
-```bash
+``` none
 $ glide
 usage: glide_startup.py [options] <input_file>
 glide_startup.py: error: the following arguments are required: input_file
@@ -72,7 +79,7 @@ glide_startup.py: error: the following arguments are required: input_file
 To launch the Maestro GUI, once you have loaded the Schrödinger module, simply
 run:
 
-```bash
+``` none
 $ maestro
 ```
 
@@ -81,7 +88,7 @@ and request it as well for your job allocation.
 
 Here are some example commands you can run:
 
-```bash
+``` none
 # on your local machine
 $ ssh -X login.sherlock.stanford.edu
 
@@ -115,7 +122,7 @@ For more information about X11 forwarding, you can refer to this
 Here's an example [batch][url_sbatch] script, requesting 1 CPU, for 10 minutes
 on the `normal` partition, that can be saved as `water.sbatch`:
 
-```bash
+``` bash
 #!/usr/bin/bash
 #SBATCH -o water.%j.out
 #SBATCH -e water.%j.err
@@ -132,7 +139,7 @@ jaguar run -WAIT H20.in
 
 Save this input file as `H2O.in`:
 
-```none
+``` none
 &gen
 &
 &echo
@@ -146,7 +153,7 @@ H2      0.0000000000000  -0.7531080000000   0.4540064000000
 
 And you can submit the batch script with:
 
-```bash
+``` none
 $ sbatch water.sbatch
 ```
 
@@ -157,10 +164,10 @@ errors in the job output and error files: `water.<jobid>.{out,err}`.
 [comment]: #  (link URLs -----------------------------------------------------)
 
 [url_schrodinger]:          //www.schrodinger.com
-[url_schrodinger_support]:  //support.schrodinger.com/s/
+[url_schrodinger_support]:  //my.schrodinger.com/support
 [url_sul]:                  //library.stanford.edu/
 [url_x11]:                  //uit.stanford.edu/service/sharedcomputing/moreX
 
-[url_modules]:              /docs/software/modules.md
-[url_sbatch]:               /docs/user-guide/running-jobs.md#batch-jobs
-[url_ondemand_doc]:         /docs/user-guide/ondemand.md
+[url_modules]:              ../modules.md
+[url_sbatch]:               ../../user-guide/running-jobs.md#batch-jobs
+[url_ondemand_doc]:         ../../user-guide/ondemand.md

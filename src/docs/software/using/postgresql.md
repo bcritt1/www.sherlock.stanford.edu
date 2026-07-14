@@ -1,3 +1,9 @@
+---
+icon: simple/postgresql
+tags:
+    - software
+---
+
 ## Introduction
 
 [PostgreSQL][url_postgresql] is a powerful, open source object-relational
@@ -40,7 +46,7 @@ below only need to be executed once.
 Assuming you'll want to store your database files in a `db/` directory in your
 `$SCRATCH` folder, you can run the following commands:
 
-``` shell
+``` none
 $ export DB_DIR=$SCRATCH/db
 $ mkdir $DB_DIR
 ```
@@ -49,7 +55,7 @@ Once you have your `$DB_DIR` in place, you need to initialize your database
 with some internal data that PostgreSQL needs. In the same terminal, run the
 following commands:
 
-``` shell
+``` none
 $ ml system postgresql
 $ initdb $DB_DIR
 ```
@@ -60,7 +66,7 @@ You can now start the PostgreSQL server. For this, first get an allocation on a
 compute node, note the hostname of the compute node your job has been
 allocated, load the `postgresql` module, and then run the `postgresql` server:
 
-``` shell
+``` none
 $ srun --pty bash
 $ echo $SLURM_JOB_NODELIST
 sh-01-01
@@ -83,10 +89,9 @@ node your job is running on.
 
 From another terminal on Sherlock, connect to your job's compute node (here,
 it's `sh-01-01`, as shown above), load the `postgresql` module, and then run
-the `createdb` command: it will create a database that you can use as a
-testbed:
+the `createdb` command: it will create a database that you can use for testing:
 
-``` shell
+``` none
 $ ssh sh-01-01
 $ ml system postgresql
 $ createdb test_db
@@ -95,7 +100,7 @@ $ createdb test_db
 Once this is done, from the same shell, you can run the `psql` command, which
 will open the PostgreSQL shell, ready to run your SQL queries:
 
-``` shell
+``` none
 $ psql test_db
 psql (10.5)
 Type "help" for help.
@@ -135,8 +140,8 @@ in your `$DB_DIR/pg_hba.conf` file (see below).
 #### Secure access
 
 To allow network connections to the database server, a password will need to be
-defined for the PostgreSQL user.  That will allow this user to connect to the
-PostgreSQL instance from any node.  Please make sure to replace the
+defined for the PostgreSQL user. That will allow this user to connect to the
+PostgreSQL instance from any node. Please make sure to replace the
 `my-secure-password` string below by the actual password of your choice.
 
 !!! Danger "Choose a proper password"
@@ -152,7 +157,7 @@ Once you've chosen your password, you can now start the PostgreSQL server on a
 compute, as described in the previous section, initialize the database, and
 set the user password:
 
-``` shell
+``` none
 $ srun --pty bash
 
 $ echo $SLURM_JOB_NODELIST
@@ -170,7 +175,7 @@ $ psql -c "ALTER USER $USER PASSWORD 'my-secure-password';" test_db
 Then, we need to edit the `$DB_DIR/ph_hba.conf` file to allow network access
 for user `$USER`:
 
-``` shell
+``` none
 $ cat << EOF > $DB_DIR/pg_hba.conf
 local   all             all                                     trust
 host    all             all             127.0.0.1/32            trust
@@ -182,7 +187,7 @@ EOF
 Once you've done that, you're ready to terminate that interactive job, and
 start a dedicated PostgreSQL server job.
 
-``` shell
+``` none
 $ pg_ctl stop -D $DB_DIR
 $ logout
 ```
@@ -191,7 +196,7 @@ $ logout
 
 You can use the following `postgresql.sbatch` job as a template:
 
-``` shell
+``` shell { title="postgresql.sbatch" .copy .select }
 #!/bin/bash
 
 #SBATCH --job-name=postgresql
@@ -207,7 +212,7 @@ postgres -i -D $DB_DIR
 
 and submit it with:
 
-``` shell
+``` none
 $ sbatch postgresql.sbatch
 ```
 
@@ -232,7 +237,7 @@ language, you should be able to connect to your running PostgreSQL instance,
 
 First, identify the node your job is running on with `squeue`:
 
-``` shell
+``` none
 $ squeue -u $USER -n postgresql
              JOBID PARTITION       NAME     USER ST       TIME  NODES NODELIST(REASON)
           21383445    normal postgresql   kilian  R       0:07      1 sh-01-02
@@ -240,7 +245,7 @@ $ squeue -u $USER -n postgresql
 
 and then, point your PostgreSQL client to that node:
 
-``` shell
+``` none
 $ ml system postgresql
 $ psql -h sh-06-34  test_db
 Password:
@@ -275,12 +280,12 @@ jobs][url_recurring_jobs] and submit long-running database instances.
 [comment]: #  (link URLs -----------------------------------------------------)
 
 [url_postgresql]:       //www.postgresql.org/
-[url_postgresql_docs]:  //postgresql.com/docs/
+[url_postgresql_docs]:  //www.postgresql.org/docs/
 [url_heredoc]:          //en.wikipedia.org/wiki/Here_document
 
-[url_compute_node]:     /docs/glossary.md#node
-[url_storage]:          /docs/storage/index.md
-[url_recurring_jobs]:   /docs/user-guide/running-jobs.md#recurring-jobs
+[url_compute_node]:     ../../glossary.md#node
+[url_storage]:          ../../storage/index.md
+[url_recurring_jobs]:   ../../advanced-topics/service-jobs.md#recurring-jobs
 
 
 --8<--- "includes/_acronyms.md"

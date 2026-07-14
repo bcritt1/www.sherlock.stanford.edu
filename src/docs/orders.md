@@ -1,3 +1,9 @@
+---
+icon: material/server
+tags:
+    - orders
+---
+
 # Ordering nodes <small>on Sherlock</small>
 
 
@@ -18,7 +24,7 @@ provides the PI with much greater flexibility than owning a standalone cluster.
 
 !!! warning "Compute nodes are purchased for a duration of 4 years"
 
-    Compute nodes are purchased and maintained based on a 4-year lifecycle,
+    Compute nodes are purchased and maintained based on a 4-year life cycle,
     which is the duration of the equipment warranty and vendor support.
 
 Owners will be notified during the 4th year that their nodes' lifetime is about
@@ -91,7 +97,7 @@ below:
     bandwidth per core, which could be lower on higher core-count
     configurations like `CSCALE`. With multiple times more cores than `CBASE`,
     they still provide the same total amount of bandwidth to remote and local
-    storage, as well as, to a lesser extend, to memory.  Higher core-count CPUs
+    storage, as well as, to a lesser extend, to memory. Higher core-count CPUs
     also often offer lower core frequencies, which combined with less bandwidth
     per core, may result in lower performance for serial jobs.
 
@@ -237,7 +243,7 @@ And we'll be in touch shortly!
 
 [url_catalog]:      //www.sherlock.stanford.edu/catalog
 [url_order_form]:   //www.sherlock.stanford.edu/order
-[url_pta]:          //web.stanford.edu/group/fms/fingate/staff/acctstructure/PTA_req_process.html
+[url_pta]:          //fingate.stanford.edu/account-structure/request-new-account-pta
 [email]:            mailto:{{support_email}}
 
 [^service_fee]:     **infrastructure fees** are considered non-capital for cost

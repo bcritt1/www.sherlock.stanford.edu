@@ -1,3 +1,9 @@
+---
+icon: material/puzzle-outline
+tags:
+    - software
+---
+
 ## Environment modules
 
 Software is provided on Sherlock under the form of loadable *environment
@@ -26,7 +32,7 @@ corresponding software module.
 When you load a module, the system will set or modify your user environment
 variables to enable access to the software package provided by that module. For
 instance, the `$PATH` environment variable might be updated so that appropriate
-executables for that package can be used.
+binaries for that package can be used.
 
 
 ## Module categories
@@ -48,7 +54,7 @@ For instance, to be able to load the `gromacs` module, you'll first need to
 load the `chemistry` module. This can be done in a single command, by
 specifying first the category, then the actual application module name:
 
-``` shell
+``` none
 $ module load chemistry gromacs
 ```
 
@@ -91,7 +97,7 @@ semantics.
 | `module load gsl/2.3` | `ml gsl/2.3` | Load specific version of a module |
 | `module unload gcc` | `ml -gcc` | Unload a module |
 | `module swap gcc icc` |  `ml -gcc icc` | Swap a module (unload `gcc` and replace it with `icc`) |
-| `module purge` | `ml purge` | Remove all modules[^sticky_mod]
+| `module purge` | `ml purge` | Remove all modules[^sticky_mod] |
 | `module save foo` | `ml save foo` | Save the state of all loaded modules in a collection named `foo` |
 | `module restore foo` | `ml restore foo` | Restore the state of saved modules from the `foo` collection |
 
@@ -116,7 +122,7 @@ properties are:
 * `S`: Module is sticky, requires `--force` to unload or purge
 * `L`: Indicate currently loaded module
 * `D`: Default module that will be loaded when multiple versions are available
-* `r`: Restricted access, typically software under license.  [Contact
+* `r`: Restricted access, typically software under license. [Contact
   us][url_contact] for details
 * `g`: GPU-accelerated software, will only run on GPU nodes
 * `m`: Software supports parallel execution using MPI
@@ -131,7 +137,7 @@ You can search through all the available modules for either:
 
 For instance, if you want to know how to load the `gromacs` module, you can do:
 
-``` shell
+``` none
 $ module spider gromacs
 ```
 
@@ -140,7 +146,7 @@ a specific string of characters in their name or description, you can use
 `module keyword`. For instance, the following command will list all the modules
 providing a BLAS library:
 
-``` shell
+``` none
 $ module keyword blas
 ```
 
@@ -151,7 +157,7 @@ $ module keyword blas
 
 To list all the modules that can be loaded, you can do:
 
-``` shell
+``` none
 $ ml av
 
 -- math -- numerical libraries, statistics, deep-learning, computer science ---
@@ -187,11 +193,16 @@ Use "module keyword key1 key2 ..." to search for all possible modules matching
 any of the "keys".
 ```
 
+!!! note
+
+    The output above is illustrative. The actual list of available modules and
+    their versions will differ. Run `ml av` on Sherlock to see the current list.
+
 #### Searching
 
 To search for a specific string in modules names and descriptions, you can run:
 
-``` shell
+``` none
 $ module keyword numpy
 ---------------------------------------------------------------------------
 
@@ -239,7 +250,7 @@ The following modules match your search criteria: "compiler"
 To get information about a specific module, especially how to load it, the
 following command can be used:
 
-``` shell
+``` none
 $ module spider gromacs
 
 -------------------------------------------------------------------------------
@@ -263,7 +274,7 @@ $ module spider gromacs
 
 Loading a category module allows to get access to field-specific software:
 
-``` shell
+``` none
 $ ml chemistry
 $ ml av
 
@@ -293,6 +304,11 @@ $ ml av
 [...]
 ```
 
+!!! note
+
+    The output above is illustrative. The actual list of available modules and
+    their versions will differ. Run `ml av` on Sherlock to see the current list.
+
 ### Resetting the modules environment
 
 If you want to reset your modules environment as it was when you initially
@@ -316,7 +332,7 @@ scripts.
 `module load` commands should be placed right after `#SBATCH` directives and
 before the actual executable calls. For instance:
 
-``` shell
+``` shell { title="job.sbatch" .copy .select }
 #!/bin/bash
 #SBATCH ...
 #SBATCH ...
@@ -347,7 +363,7 @@ by contributor name.
 
 For instance, listing the available contributed modules can be done with:
 
-``` shell
+``` none
 $ ml contribs
 $ ml av
 -------------------- contribs -- contributed software ----------------------
@@ -356,7 +372,7 @@ $ ml av
 
 To get information about a specific lab module:
 
-``` shell
+``` none
 $ ml show poldrack
 ----------------------------------------------------------------------------
    /share/software/modules/contribs/poldrack.lua:
@@ -371,7 +387,7 @@ whatis("Description: Software modules contributed by the Poldrack Lab.")
 
 And to list the available software modules contributed by the lab:
 
-``` shell
+``` none
 $ ml poldrack
 $ ml av
 

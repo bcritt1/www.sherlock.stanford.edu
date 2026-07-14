@@ -1,3 +1,9 @@
+---
+icon: material/text-search
+tags:
+    - reference
+---
+
 ## What's a cluster?
 <!-- markdownlint-disable MD001 -->
 
@@ -9,7 +15,8 @@ What makes it a "super-computer" is the ability for a program to address
 resources (such as memory, CPU cores) located in different compute nodes,
 through the high-performance interconnect network.
 
-![overview](images/cluster_overview.png)
+![overview](images/cluster_overview.png#only-light)
+![overview](images/cluster_overview_dark.png#only-dark)
 
 On a computing cluster, users typically connect to [login nodes][g_login],
 using a secure remote login protocol such as [SSH][g_ssh]. Unlike in
@@ -35,7 +42,9 @@ the user to review and analyze.
 The terms that are typically used to describe cluster components could be
 confusing, so in an effort to clarify things, here's a schema of the most
 important ones, and their definition.
-![components](images/cluster_components.png)
+
+![components](images/cluster_components.png#only-light)
+![components](images/cluster_components_dark.png#only-dark)
 
 ### CPU
 
@@ -77,7 +86,7 @@ definitions, presented in alphabetical order:
 coordinated functions, tasks, or activities for the benefit of the user. In the
 context of scientific computing, an application typically performs computations
 related to a scientific goal (molecular dynamics simulations, genome assembly,
-compuational fluid dynamics simulations, etc).
+computational fluid dynamics simulations, etc).
 
 ### Backfill
 
@@ -89,29 +98,30 @@ doing so doesn't push back the higher-priority jobs expected start time.
 ### Executable
 
 : A binary (or executable) program refers to the machine-code compiled version
-of an application. This is  which is a binary file that a computer can execute
-directly. As opposed to the application source code, which is the
-human-readable version of the application internal instructions, and which
-needs to be compiled by a compiler to produce the executable binary.
+of an application. It is a binary file that a computer can execute directly,
+as opposed to the application source code, which is the human-readable version
+of the application internal instructions, and which needs to be compiled by a
+compiler to produce the executable binary.
 
 ### Fairshare
 
 : A resource scheduler ranks jobs by priority for execution. Each job's
 priority in queue is determined by multiple factors, among which
-one being the user's fairshare score.  A user's fairshare score is computed
+one being the user's fairshare score. A user's fairshare score is computed
 based on a target (the given portion of the resources that this user should be
-able to use) and the user's effetive usage, *ie* the amount of resources (s)he
-effectively used in the past.  As a result, the more resources past jobs have
-used, the lower the priority of the next jobs will be.  Past usage is computed
-based on a sliding window and progressively forgotten over time.  This enables
+able to use) and the user's effective usage, *ie* the amount of resources they
+effectively used in the past. As a result, the more resources past jobs have
+used, the lower the priority of the next jobs will be. Past usage is computed
+based on a sliding window and progressively forgotten over time. This enables
 all users on a shared resource to get a fair portion of it for their own use,
-by giving higher priority to users who have been underserved in the past.
+by giving higher priority to users who used fewer resources than their
+target in the past.
 
 ### FLOPS
 
 : Floating-point Operations Per Second (FLOPS) are a measure of computing
 performance, and represent the number of floating-point operations that a CPU
-can perform each second. Modern CPUs and GPUs are capable of doing TeraFLOPS
+can perform each second. Modern CPUs and GPUs are capable of doing TFLOPs
 (10^12 floating-point operations per second), depending on the precision of
 those operations (half-precision: 16 bits, single-precision: 32 bits,
 double-precision: 64 bits).
@@ -119,7 +129,7 @@ double-precision: 64 bits).
 ### GPU
 
 : A Graphical Processing Unit (GPU) is a specialized device initially designed
-to generate graphical output.  On modern computing architecture, they are used
+to generate graphical output. On modern computing architecture, they are used
 to accelerate certain types of computation, which they are much faster than
 CPUs at. GPUs have their own memory, and are attached to CPUs, within a node.
 Each compute node can host one or more GPUs.
@@ -127,16 +137,16 @@ Each compute node can host one or more GPUs.
 ### HPC
 
 : High Performance Computing (HPC) refers to the practice of aggregating
-computing power to achieve higher performance that would be possible by using a
+computing power to achieve higher performance than would be possible by using a
 typical computer.
 
 ### Infiniband
 
-: Infiniband is a networking standard that features high bandwidth and low
-latency. The current Infiniband devices are capable of transferring data at up
-to 200 Gbits/sec with less than a microsecond latency. As of this writing, the
-popular Infiniband versions are HDR (High Data Rate) with 200 Gbits/sec and
-EDR (Enhanced Data Rate) with 100 Gbits/sec.
+: [Infiniband][url_ib] is a networking standard that features high bandwidth
+and low latency. The current Infiniband devices are capable of transferring
+data with less than a microsecond latency. As of this writing, the popular
+Infiniband versions are EDR (Enhanced Data Rate, 100 Gbps), HDR (High Data
+Rate, 200 Gbps), and NDR (Next Data Rate, 400 Gbps).
 
 ### IOPS
 
@@ -146,15 +156,15 @@ system performance.
 
 ### Job
 
-: A job, or batch job, is the scheduler’s base unit of computing by which
-resources are allocated to a user for a specified amount of time. Users create
+: A job, or batch job, is the base unit of work the scheduler uses to allocate
+resources to a user for a specified amount of time. Users create
 job submission scripts to ask the scheduler for resources such as cores,
 memory, runtime, etc. The scheduler puts the requests in a queue and allocates
 requested resources based on jobs’ priority.
 
 ### Job step
 
-: Job steps are sets of (possibly parallel) tasks within a job
+: Job steps are sets of (possibly parallel) tasks within a job.
 
 ### Login nodes
 
@@ -170,7 +180,7 @@ do some simple tests, and submit their batch jobs to the parallel computer.
 ### Modules
 
 : Environment modules, or software modules, are a type of software management
-tool used on in most HPC environments. Using modules enable users to
+tool used in most HPC environments. Using modules enable users to
 selectively pick the software that they want to use and add them to their
 environment. This allows to switch between different versions or flavors of the
 same software, pick compilers, libraries and software components and avoid
@@ -178,7 +188,7 @@ conflicts between them.
 
 ### MPI
 
-: Message Passing Interface (MPI) is a standardized and portable
+: [Message Passing Interface][url_mpi] (MPI) is a standardized and portable
 message-passing system designed to exchange information between processes
 running on different nodes. There are several implementations of the MPI
 standard, which is the most common way used to scale parallel applications
@@ -187,7 +197,7 @@ beyond a single compute node.
 ### OpenMP
 
 : Open Multi Processing (OpenMP) is a parallel programming model
-designed for shared memory architecture. It's based on pragmas that can be
+designed for shared memory architecture. It's based on directives that can be
 added in applications to let the compiler generate a code that
 can run on multiple cores, within the same node.
 
@@ -200,6 +210,12 @@ could form a partition.
     On Sherlock, you can see detailed partition information with the
 [`sh_part`][url_sh_part] or `sinfo` commands.
 
+### Process
+
+: A process, in the simplest terms, is an executing program. Each process has
+its own memory space and system resources, and is managed independently by the
+operating system. One or more threads run in the context of a process.
+
 ### QOS
 
 : A Quality Of Service (QOS) is the set of rules and limitations that apply to
@@ -209,7 +225,7 @@ often referred to as a scheduler *queue*.
 
 ### Run time
 
-: The run time, or walltime, of a job is the time required to finish its
+: The run time, or wall-clock time, of a job is the time required to finish its
 execution.
 
 ### Scheduler
@@ -233,27 +249,25 @@ Based on the client-server model, multiple users with an SSH client can access
 a remote computer. Some operating systems such as Linux and Mac OS have a
 built-in SSH client and others can use one of many publicly available clients.
 
-### Thread
-
-: A process, in the simplest terms, is an executing program. One or more
-threads run in the context of the process. A thread is the basic unit to which
-the operating system allocates processor time. A thread can execute any part of
-the process code, including parts currently being executed by another thread.
-Threads are co-located on the same node.
-
 ### Task
 
 : In the Slurm context, a task is to be understood as a process. A
 multi-process program is made of several tasks. A task is typically used to
-schedule a MPI process, that in turn can use several CPUs.  By contrast, a
+schedule an MPI process, that in turn can use several CPUs. By contrast, a
 multi-threaded program is composed of only one task, which uses several CPUs.
+
+### Thread
+
+: A thread is the basic unit to which the operating system allocates processor
+time. One or more threads run within a process and share its memory space. A
+thread can execute any part of the process code, including parts currently
+being executed by another thread. Threads are co-located on the same node.
 
 
 
 [comment]: #  (link URLs -----------------------------------------------------)
 
 [url_ib]:       //www.infinibandta.org/about-infiniband/
-[url_ip]:       //tools.ietf.org/html/rfc791
 [url_mpi]:      //www.mpi-forum.org
 [url_sh_part]:  user-guide/running-jobs.md#available-resources
 

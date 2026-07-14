@@ -1,3 +1,9 @@
+---
+icon: material/function-variant
+tags:
+    - software
+---
+
 ## Introduction
 
 [MATLAB][url_matlab] is a numerical computing environment and proprietary
@@ -26,7 +32,7 @@ MATLAB with good results.
 
 The MATLAB [module][url_modules] can be loaded with:
 
-``` shell
+``` none
 $ ml load matlab
 ```
 
@@ -41,7 +47,7 @@ page][url_software_list].
     the following message:
     ```
     -----------------------------------------------------------------------
-    WARNING: running MATLAB directly on login nodes is not supported.  Please
+    WARNING: running MATLAB directly on login nodes is not supported. Please
     make sure you request an interactive session on a compute node with "sh_dev"
     for instance) before launching MATLAB interactively.
     -----------------------------------------------------------------------
@@ -54,7 +60,7 @@ Once you are on a compute node and your environment is configured (_ie._ when
 the `matlab` module is loaded), MATLAB can be started by simply typing `matlab`
 at the shell prompt.
 
-``` shell
+``` none
 $ sh_dev
 $ ml load matlab
 $ matlab
@@ -72,7 +78,7 @@ For product information, visit www.mathworks.com.
 
 For a listing of command line options:
 
-``` shell
+``` none
 $ matlab -help
 ```
 
@@ -97,13 +103,13 @@ client][url_ssh_client].
 
 For instance:
 
-``` shell
+``` none
 $ ssh -X <YourSUNetID>@login.sherlock.stanford.edu
 ```
 
 And then, once on Sherlock:
 
-``` shell
+``` none
 $ sh_dev
 $ ml load matlab
 $ matlab
@@ -119,7 +125,7 @@ For more info on X11 forwarding, you can refer to this [UIT page][url_X11_UIT].
 
 Here is an example MATLAB batch script that can submitted with `sbatch`:
 
-``` shell
+``` shell { title="matlab_job.sbatch" .copy .select }
 #!/bin/bash
 #SBATCH --job-name=matlab_test
 #SBATCH --output=matlab_test."%j".out
@@ -136,7 +142,7 @@ matlab -nodisplay < example.m
 
 This simple job, named `matlab_test` will run a MATLAB script named `example.m`
 in the `normal` [partition][url_partition], for a duration of 10 minutes, and
-use 1 [CPU][url_cpu] and 8GB of RAM.  It will send you an email (to
+use 1 [CPU][url_cpu] and 8GB of RAM. It will send you an email (to
 whatever email you used wen you signed up for Sherlock) when it begins, ends or
 fails.
 
@@ -149,7 +155,7 @@ the contents of the script, and save it as `matlab_test.sbatch`
 
 Then, submit the job with the `sbatch` command:
 
-``` shell
+``` none
 $ sbatch matlab_test.sbatch
 Submitted batch job 59942277
 ```
@@ -164,11 +170,11 @@ results.
 You can run your MATLAB code across multiple CPUs on Sherlock using
 [`parfor`][url_parfor] loops, to take advantage of the multiple CPU cores that
 each node features. You can submit a job requesting as many CPUs as there are
-on a node in a single job.  The key is to grab the [SLURM environment
+on a node in a single job. The key is to grab the [SLURM environment
 variable][url_slurm_env] `$SLURM_CPUS_PER_TASK` and create the worker pool in
 your MATLAB code with:
 
-``` matlab
+``` matlab { .copy .select }
 parpool('local', str2num(getenv('SLURM_CPUS_PER_TASK')))
 ```
 
@@ -253,19 +259,19 @@ it scales.
 
 [url_contact]:          mailto:{{support_email}}
 
-[url_R]:                /docs/software/using/R.md
-[url_julia]:            /docs/software/using/julia.md
-[url_python]:           /docs/software/using/python.md
-[url_submit]:           /docs/getting-started/submitting.md#batch-scripts
-[url_node]:             /docs/user-guide/running-jobs.md#compute-nodes
-[url_interactive]:      /docs/user-guide/running-jobs.md#interactive-jobs
-[url_ssh_client]:       /docs/getting-started/index.md#ssh-clients
-[url_modules]:          /docs/software/modules.md
-[url_software_list]:    /docs/software/list.md
-[url_text_editor]:      /docs/getting-started/index.md#text-editors
-[url_partition]:        /docs/glossary.md#partition
-[url_cpu]:              /docs/glossary.md#cpu
-[url_squeue]:           /docs/getting-started/submitting.md#check-the-job
+[url_R]:                R.md
+[url_julia]:            julia.md
+[url_python]:           python.md
+[url_submit]:           ../../getting-started/submitting.md#batch-scripts
+[url_node]:             ../../user-guide/running-jobs.md#compute-nodes
+[url_interactive]:      ../../user-guide/running-jobs.md#interactive-jobs
+[url_ssh_client]:       ../../getting-started/index.md#ssh-clients
+[url_modules]:          ../modules.md
+[url_software_list]:    ../list.md
+[url_text_editor]:      ../../getting-started/index.md#text-editors
+[url_partition]:        ../../glossary.md#partition
+[url_cpu]:              ../../glossary.md#cpu
+[url_squeue]:           ../../getting-started/submitting.md#check-the-job
 
 
 

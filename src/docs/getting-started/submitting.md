@@ -1,4 +1,5 @@
 ---
+icon: material/script-text-play-outline
 tags:
     - slurm
 ---
@@ -35,7 +36,7 @@ The scheduler provides three key functions:
     #slurm_logo { display: none; }
 }
 </style>
-![Slurm logo](https://slurm.schedmd.com/slurm_logo.png){: id=slurm_logo align=right width=115px loading=lazy :}
+![Slurm logo](https://slurm.schedmd.com/slurm_logo.png){: id=slurm_logo align=right width=115px loading=lazy :} <!-- markdownlint-disable-line MD013 -->
 
 
 Sherlock uses [Slurm][url_slurm], an open-source resource manager and job
@@ -52,9 +53,11 @@ the resources you need, you’ll be able to get your work done.
     resources your job requests (CPUs, GPUs, memory, nodes, and time), the
     longer it may have to wait in queue before it could start.
 
-    In other words:
-    accurately requesting resources to match your job's needs will minimize
-    your wait times.
+    In other words: accurately requesting resources to match your job's needs
+    will minimize your wait times.
+
+    See [Scheduling on Sherlock][url_scheduling] for a more detailed
+    explanation of how the scheduler prioritizes and places jobs.
 
 
 ## How to submit a job
@@ -80,7 +83,7 @@ the `srun` command.
 For instance, the following script would request one task with one CPU for 10
 minutes, along with 2 GB of memory, in the default partition:
 
-``` shell title="submit.sh"
+``` shell { title="submit.sh" .copy .select }
 #!/bin/bash
 #
 #SBATCH --job-name=test
@@ -133,7 +136,7 @@ Once the submission script is written properly, you can submit it to the
 scheduler with the `sbatch` command. Upon success, `sbatch` will return the ID
 it has assigned to the job (the jobid).
 
-``` shell
+``` none
 $ sbatch submit.sh
 Submitted batch job 1377
 ```
@@ -148,7 +151,7 @@ goes to the `COMPLETED` state, otherwise, its state is set to `FAILED`.
 You'll be able to check the status of your job and follow its evolution with
 the `squeue -u $USER` command:
 
-``` shell
+``` none
 $ squeue -u $USER
      JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
       1377    normal     test   kilian  R       0:12      1 sh02-01n01
@@ -160,7 +163,7 @@ result of the commands run in the script file. That output file is names
 In the above example, you can list the contents of that output file with the
 following commands:
 
-``` shell
+``` none
 $ cat slurm-1377.out
 sh02-01n01
 ```
@@ -181,8 +184,9 @@ there are many other options and areas to explore in the next sections:
 
 [comment]: #  (link URLs -----------------------------------------------------)
 
-[url_slurm]:  //slurm.schedmd.com
-[url_top500]: //top500.org
+[url_slurm]:      //slurm.schedmd.com
+[url_top500]:     //top500.org
+[url_scheduling]: ../advanced-topics/scheduling.md
 
 [url_texteditors]:    index.md#text-editors
 [url_transfer]:       ../storage/data-transfer.md
