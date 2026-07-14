@@ -444,7 +444,6 @@ To start a VS Code session via Sherlock OnDemand:
 
 ![ood_code-server](images/ood_code-server.png)
 
-=======
 ### AI coding assistant in code-server
 
 You can use the [Continue][url_continue] extension to connect code-server to
@@ -472,7 +471,6 @@ After that, in the Continue panel, you can start chatting with the model. More
 details are available in the [Ollama documentation][url_ollama_continue].
 
 
->>>>>>> upstream/main
 ## Common Issues
 
 ### No Space Left on Device
@@ -584,17 +582,6 @@ To submit a ticket about your current or recent interactive session:
 [url_ood_docs]:     //www.osc.edu/resources/online_portals/ondemand
 [url_ood_logout]:   //login.sherlock.stanford.edu/logout
 
-[url_storage]:      /docs/storage/index.md
-[url_quota]:        /docs/storage/index.md#quotas-and-limits
-[url_files]:        #managing-files
-[url_ncdu]:         /docs/storage/index.md#locating-large-directories
-[url_rclone]:       /docs/software/using/rclone.md
-[url_gssapi]:       /docs/advanced-topics/connection.md#gssapi
-[url_avoid_duo]:    /docs/advanced-topics/connection.md#avoiding-multiple-duo-prompts
-[url_running_jobs]: /docs/user-guide/running-jobs.md
-[url_connect]:      /docs/getting-started/connecting.md
-[url_r_packages]:   /docs/software/using/R.md#r-packages
-=======
 [url_storage]:      ../storage/index.md
 [url_quota]:        ../storage/index.md#quotas-and-limits
 [url_files]:        #managing-files
